@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BigGames — Официальный Портал</title>
+  <style>
+    :root {
+      --bg-color: #0d0d11;
+      --card-bg: #15151e;
+      --card-border: #262636;
+      --accent-color: #ffffff;
+      --accent-hover: #e0e0e0;
+      --text-main: #f0f0f5;
+      --text-muted: #8e8e9e;
+      --dev-status: #ffcc00;
+      --ready-status: #34c759;
+      --header-bg: rgba(13, 13, 17, 0.9);
+      --nav-bg: #111118;
+      --dev-card-bg: #181824;
+      --inner-box-bg: #0d0d11;
+      --input-bg: var(--card-bg);
+      --input-border: var(--card-border);
+      
+      --price-free: #8e8e9e;
+      --price-stars: #ffd60a;
+      --price-premium: #bf5af2;
+    }
+
+    body.light-theme {
+      --bg-color: #f4f4f8;
+      --card-bg: #ffffff;
+      --card-border: #e0e0e8;
+      --accent-color: #111118;
+      --accent-hover: #333344;
+      --text-main: #1c1c28;
+      --text-muted: #6e6e82;
+      --header-bg: rgba(255, 255, 255, 0.9);
+      --nav-bg: #e8e8f0;
+      --dev-card-bg: #ffffff;
+      --inner-box-bg: #f8f8fc;
+      --input-bg: #ffffff;
+      --input-border: #d0d0dc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    header {
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .logo-box {
+      font-weight: 900;
+      font-size: 20px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-box.logo-biggames {
+      background: var(--text-main);
+      color: var(--bg-color);
+    }
+
+    .logo-box.logo-errorgames {
+      background: linear-gradient(135deg, #ff3b30, #007aff);
+      color: #ffffff;
+    }
+
+    .logo-box.logo-glitchgames {
+      background: #ff2d55;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 45, 85, 0.5);
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .file-input-wrapper {
+      position: relative;
+    }
+
+    .btn-upload {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-upload:hover {
+      border-color: #52527a;
+    }
+
+    .file-input-wrapper input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    nav {
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0 30px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .nav-tabs {
+      display: flex;
+      list-style: none;
+      gap: 5px;
+    }
+
+    .nav-tab {
+      padding: 14px 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-main);
+    }
+
+    .nav-tab.active {
+      color: var(--text-main);
+      border-bottom-color: var(--text-main);
+    }
+
+    .controls-bar {
+      padding: 20px 30px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      padding: 10px 16px;
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: #52527a;
+    }
+
+    main {
+      flex: 1;
+      padding: 10px 30px 40px 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #3d3d5c;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      gap: 10px;
+    }
+
+    .card-title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-logo-frame {
+      width: 36px;
+      height: 36px;
+      background: var(--inner-box-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .badge-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .badge-dev {
+      background: rgba(255, 204, 0, 0.15);
+      color: #ffd60a;
+      border: 1px solid rgba(255, 204, 0, 0.3);
+    }
+
+    .badge-ready {
+      background: rgba(52, 199, 89, 0.15);
+      color: #32d74b;
+      border: 1px solid rgba(52, 199, 89, 0.3);
+    }
+
+    .badge-hidden {
+      background: rgba(10, 132, 255, 0.15);
+      color: #0a84ff;
+      border: 1px solid rgba(10, 132, 255, 0.4);
+    }
+
+    .badge-ai {
+      background: rgba(255, 59, 48, 0.2);
+      color: #ff453a;
+      border: 1px solid rgba(255, 59, 48, 0.5);
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    .price-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .price-tag.tag-free {
+      background: rgba(142, 142, 158, 0.15);
+      color: var(--price-free);
+      border: 1px solid rgba(142, 142, 158, 0.4);
+    }
+
+    .price-tag.tag-stars {
+      background: rgba(255, 214, 10, 0.15);
+      color: var(--price-stars);
+      border: 1px solid rgba(255, 214, 10, 0.4);
+    }
+
+    .price-tag.tag-premium {
+      background: rgba(191, 90, 242, 0.15);
+      color: var(--price-premium);
+      border: 1px solid rgba(191, 90, 242, 0.4);
+    }
+
+    .card-id {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      font-family: monospace;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .card-btn {
+      background: var(--card-border);
+      color: var(--text-main);
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .card:hover .card-btn {
+      background: var(--text-main);
+      color: var(--bg-color);
+    }
+
+    .static-page {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 30px;
+      line-height: 1.6;
+    }
+
+    .static-page h2 {
+      margin-bottom: 20px;
+      color: var(--text-main);
+      font-size: 22px;
+    }
+
+    .static-page h3 {
+      margin: 20px 0 10px 0;
+      color: var(--text-main);
+      font-size: 18px;
+    }
+
+    .static-page p {
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .static-page a {
+      color: #4da6ff;
+      text-decoration: underline;
+    }
+
+    .spoiler-toggle {
+      background: var(--inner-box-bg);
+      border: 1px dashed var(--card-border);
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #4da6ff;
+      display: inline-block;
+      user-select: none;
+    }
+    .spoiler-content {
+      display: none;
+      margin-top: 4px;
+      padding: 6px;
+      background: var(--inner-box-bg);
+      border-radius: 4px;
+    }
+    .spoiler-content.revealed {
+      display: inline-block;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .social-card {
+      background: var(--inner-box-bg);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-width: 2px;
+      border-style: solid;
+    }
+
+    .social-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .social-card.color-red {
+      border-color: #ff3b30;
+      box-shadow: 0 4px 15px rgba(255, 59, 48, 0.15);
+    }
+    .social-card.color-red .social-title { color: #ff3b30; }
+
+    .social-card.color-blue {
+      border-color: #007aff;
+      box-shadow: 0 4px 15px rgba(0, 122, 255, 0.15);
+    }
+    .social-card.color-blue .social-title { color: #007aff; }
+
+    .social-card.color-gray {
+      border-color: #8e8e9e;
+      box-shadow: 0 4px 15px rgba(142, 142, 158, 0.15);
+    }
+    .social-card.color-gray .social-title { color: #8e8e9e; }
+
+    .social-card.color-green {
+      border-color: #34c759;
+      box-shadow: 0 4px 15px rgba(52, 199, 89, 0.15);
+    }
+    .social-card.color-green .social-title { color: #34c759; }
+
+    .social-card.color-purple {
+      border-color: #af52de;
+      box-shadow: 0 4px 15px rgba(175, 82, 222, 0.15);
+    }
+    .social-card.color-purple .social-title { color: #af52de; }
+
+    .social-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .social-link-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      word-break: break-all;
+    }
+
+    .dev-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .dev-card {
+      background: var(--dev-card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .dev-card:hover {
+      transform: translateY(-3px);
+      border-color: #3d3d5c;
+    }
+
+    .dev-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--card-border);
+      flex-shrink: 0;
+    }
+
+    .dev-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .dev-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .dev-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .prefix-tag {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .prefix-red {
+      background: rgba(255, 59, 48, 0.2);
+      color: #ff453a;
+      border: 1px solid rgba(255, 59, 48, 0.4);
+    }
+
+    .prefix-blue-red {
+      background: linear-gradient(135deg, rgba(10, 132, 255, 0.3), rgba(255, 69, 58, 0.3));
+      color: #70baff;
+      border: 1px solid rgba(10, 132, 255, 0.5);
+    }
+
+    .prefix-purple {
+      background: rgba(191, 90, 242, 0.2);
+      color: #bf5af2;
+      border: 1px solid rgba(191, 90, 242, 0.4);
+    }
+
+    .prefix-maroon {
+      background: rgba(128, 0, 32, 0.3);
+      color: #ff6b81;
+      border: 1px solid rgba(178, 34, 34, 0.5);
+    }
+
+    .prefix-yellow {
+      background: rgba(255, 214, 10, 0.2);
+      color: #ffd60a;
+      border: 1px solid rgba(255, 214, 10, 0.4);
+    }
+
+    .prefix-pink {
+      background: rgba(255, 45, 85, 0.2);
+      color: #ff2d55;
+      border: 1px solid rgba(255, 45, 85, 0.4);
+    }
+
+    .prefix-cyan {
+      background: rgba(10, 132, 255, 0.2);
+      color: #5ea0ff;
+      border: 1px solid rgba(10, 132, 255, 0.4);
+    }
+
+    .prefix-gray {
+      background: rgba(142, 142, 147, 0.2);
+      color: #aeaeb2;
+      border: 1px solid rgba(142, 142, 147, 0.4);
+    }
+
+    .prefix-white {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+      border: 1px solid rgba(142, 142, 147, 0.3);
+    }
+
+    .settings-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .setting-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      background: var(--inner-box-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      gap: 15px;
+    }
+
+    .setting-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .setting-title {
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 15px;
+    }
+
+    .setting-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .select-input {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .btn-toggle-sans, .btn-toggle-music {
+      background: #007aff;
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-toggle-sans:hover, .btn-toggle-music:hover {
+      background: #0062cc;
+    }
+
+    .btn-toggle-sans.active, .btn-toggle-music.active {
+      background: #ff3b30;
+    }
+
+    #sansOverlay {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      pointer-events: none;
+      display: none;
+    }
+
+    #sansOverlay img {
+      width: 140px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.5));
+    }
+
+    #musicFloatingPlayer {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 9998;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    #musicFloatingPlayer iframe {
+      width: 280px;
+      height: 157px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .player-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .player-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .player-close {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 30px;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--card-border);
+      border: none;
+      color: var(--text-main);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover {
+      background: #ff3b30;
+      color: #fff;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 5px;
+    }
+
+    .modal-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: monospace;
+      margin-bottom: 10px;
+    }
+
+    .modal-price-box {
+      margin-bottom: 20px;
+    }
+
+    .project-params {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      background: var(--inner-box-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .param-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .param-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .param-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .param-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .platform-icon {
+      height: 18px;
+      width: auto;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+
+    .gallery-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 16/9;
+      background: var(--inner-box-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .gallery-item .no-img {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 5px;
+    }
+
+    .modal-desc-box {
+      background: var(--inner-box-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 25px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-main);
+      white-space: pre-wrap;
+    }
+
+    .modal-desc-box a {
+      color: #4da6ff;
+      text-decoration: underline;
+    }
+
+    .download-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .download-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-download-link {
+      background: var(--text-main);
+      color: var(--bg-color);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .btn-download-link:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .no-downloads {
+      color: var(--text-muted);
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .dev-profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .dev-profile-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--card-border);
+    }
+
+    .dev-profile-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .dev-profile-tg {
+      font-size: 14px;
+      color: #4da6ff;
+    }
+
+    .gifts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .gift-card {
+      background: var(--inner-box-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .gift-card img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .gift-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .drag-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      border: 3px dashed #ffffff;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 700;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .drag-overlay.visible {
+      opacity: 1;
+    }
+
+    .music-input-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .music-input-box input {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .music-input-box button {
+      background: #34c759;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .author-widget {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 4px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .author-widget:hover {
+      border-color: #52527a;
+    }
+    .author-widget img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .author-widget span {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="drag-overlay" id="dragOverlay">Отпустите main.txt для загрузки</div>
+
+  <div id="sansOverlay">
+    <img src="https://i.ibb.co/8DnchTGw/2026-10-02.png" alt="Sans">
+  </div>
+
+  <div id="musicFloatingPlayer">
+    <div class="player-controls">
+      <span class="player-title" id="playerTitleText">🎵 Медиаплеер</span>
+      <button class="player-close" id="closeFloatingPlayerBtn">&times;</button>
+    </div>
+    <div id="youtubeIframeContainer"></div>
+  </div>
+
+  <header>
+    <div class="logo-container" id="logoHomeBtn" title="На главную">
+      <div class="logo-box logo-biggames" id="headerLogoBox">BG</div>
+      <div class="logo-text">BigGames</div>
+    </div>
+
+    <div class="header-actions">
+      <div class="file-input-wrapper">
+        <button class="btn-upload">
+          📄 Загрузить main.txt
+        </button>
+        <input type="file" id="txtFileInput" accept=".txt">
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="nav-tabs" id="navTabs">
+      <li class="nav-tab active" data-tab="home">Главная</li>
+      <li class="nav-tab" data-tab="games">Игры</li>
+      <li class="nav-tab" data-tab="apps">Приложения</li>
+      <li class="nav-tab" data-tab="programs">Программы</li>
+      <li class="nav-tab" data-tab="books">Книги</li>
+      <li class="nav-tab" data-tab="mods">Моды</li>
+      <li class="nav-tab" data-tab="assets">Ассеты</li>
+      <li class="nav-tab" data-tab="socials">Соцсети</li>
+      <li class="nav-tab" data-tab="about">О нас</li>
+      <li class="nav-tab" data-tab="developers">Разработчики</li>
+      <li class="nav-tab" data-tab="settings">Настройки</li>
+    </ul>
+  </nav>
+
+  <div class="controls-bar" id="controlsBar">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Поиск по названию или ID...">
+    </div>
+  </div>
+
+  <main>
+    <div class="grid-container" id="gridContainer"></div>
+    <div id="staticPageContainer" style="display: none;"></div>
+  </main>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-title" id="modalTitle">Project Name</div>
+      <div class="modal-subtitle" id="modalId">ID: project_id</div>
+      <div class="modal-price-box" id="modalPrice"></div>
+
+      <div class="project-params">
+        <div class="param-item">
+          <span class="param-label">Движок</span>
+          <span class="param-value" id="paramEngine">-</span>
+        </div>
+        <div class="param-item">
+          <span class="param-label">Язык</span>
+          <span class="param-value" id="paramLang">-</span>
+        </div>
+        <div class="param-item">
+          <span class="param-label">Формат</span>
+          <span class="param-value" id="paramFormat">-</span>
+        </div>
+        <div class="param-item">
+          <span class="param-label">Платформа</span>
+          <span class="param-value" id="paramPlatform">-</span>
+        </div>
+        <div class="param-item" style="grid-column: 1 / -1;">
+          <span class="param-label">Автор</span>
+          <span class="param-value" id="paramAuthor">-</span>
+        </div>
+      </div>
+
+      <div class="gallery-title">Скриншоты проекта:</div>
+      <div class="gallery-grid" id="modalGallery"></div>
+
+      <div class="gallery-title">Описание:</div>
+      <div class="modal-desc-box" id="modalDesc">Загрузка...</div>
+
+      <div class="download-section-title">Файлы для скачивания:</div>
+      <div class="download-buttons" id="modalDownloads"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="devModalOverlay">
+    <div class="modal-card">
+      <button class="modal-close" id="devModalClose">&times;</button>
+      <div class="dev-profile-header">
+        <img class="dev-profile-avatar" id="devModalAvatar" src="" alt="">
+        <div class="dev-profile-details">
+          <div class="modal-title" id="devModalName">Developer Name</div>
+          <div class="dev-tags" id="devModalTags"></div>
+          <div class="dev-profile-tg" id="devModalTg"></div>
+        </div>
+      </div>
+
+      <div class="gallery-title">Подарки:</div>
+      <div class="gifts-grid" id="devModalGifts"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="musicModalOverlay">
+    <div class="modal-card" style="max-width: 450px;">
+      <button class="modal-close" id="musicModalClose">&times;</button>
+      <div class="modal-title">Медиаплеер / Стрим</div>
+      <div class="setting-desc" style="margin-top: 5px;">Вставьте ссылку на YouTube (видео/Shorts) или Twitch (канал):</div>
+      <div class="music-input-box">
+        <input type="text" id="youtubeUrlInput" placeholder="https://youtube.com/... или https://twitch.tv/...">
+        <button id="applyMusicBtn">Запустить</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const giftsDictionary = {
+      'Bear': { title: 'Bear', url: 'https://i.ibb.co/ZrqdkSP/Bear-USER.png' },
+      'OWNER': { title: 'Owner', url: 'https://i.ibb.co/xS05LwkB/OWNER.png' },
+      'BOOSTER': { title: 'Booster', url: 'https://i.ibb.co/K8gQLK1/Booster.jpg' },
+      'CODER': { title: 'Coder', url: 'https://i.ibb.co/hk4JZ5W/Coder.jpg' },
+      'DESIGN': { title: 'Design', url: 'https://i.ibb.co/prhKzRcR/Design.jpg' },
+      'DEV': { title: 'Dev', url: 'https://i.ibb.co/B5vd8spJ/Dev.jpg' },
+      'GL. ADMIN': { title: 'Gl Admin', url: 'https://i.ibb.co/tTMMnwwg/Gl-Admin.jpg' },
+      'OLD': { title: 'Old', url: 'https://i.ibb.co/DPHj1xWM/Old.jpg' },
+      'USER': { title: 'User', url: 'https://i.ibb.co/Hf992gR6/User.jpg' },
+      'TESTER': { title: 'Tester', url: 'https://i.ibb.co/Dfh5CZM4/Tester.jpg' },
+      'Z. OWNER': { title: 'Z. OWNER', url: 'https://i.ibb.co/Hf6nFtPy/Z-OWNER.jpg' }
+    };
+
+    const engineColors = {
+      'PocketCode': '#00bfff',
+      'DevelStudio': '#ff3b30',
+      'NewCatroid': '#bf5af2',
+      'ClickTeam Fusion': '#ff9500',
+      'GameGuru Classic': '#007aff',
+      'GameGuru Max': '#007aff',
+      'RenPy': '#ff2d55',
+      'GameMaker': '#8e8e9e',
+      'VisualStudio': '#bf5af2',
+      'VisualStudio Code': '#00bfff',
+      'VisualStudio Code Insiders': '#34c759',
+      'BG CodeEditor': '#006400',
+      'Google AI': '#bf5af2',
+      'Google': '#bf5af2',
+      'Gemini AI': '#bf5af2',
+      'GDevelop': '#00bfff',
+      'Scratch': '#ffd60a',
+      'Wattpad': '#ff9500',
+      '-': '#8e8e9e'
+    };
+
+    const langColors = {
+      'Python': '#00bfff',
+      'C': '#00bfff',
+      'C++': '#bf5af2',
+      'C#': '#8e8e9e',
+      'C--': '#00bfff',
+      'C+': '#bf5af2',
+      'GameMaker': '#8e8e9e',
+      'php': '#ff3b30',
+      'TypeScript': '#ff3b30',
+      'JavaScript': '#007aff',
+      'java': '#007aff',
+      'html': '#007aff',
+      'AI': '#ff3b30',
+      '-': '#8e8e9e'
+    };
+
+    const platformIcons = {
+      'Windows': 'https://i.ibb.co/vxgdh9Fd/Windows.png',
+      'Linux': 'https://i.ibb.co/CKvc1RQX/Linux.png',
+      'Android': 'https://i.ibb.co/cch80hyS/Android.png'
+    };
+
+    const readyProjects = new Set([
+      'portaltimetestdemo',
+      'pvztypopushkamod',
+      'countryballstale1',
+      'crashversebattles',
+      'newlifesimulator'
+    ]);
+
+    const hiddenProjects = new Set([
+      'spriteanimator',
+      'spriteanimator2'
+    ]);
+
+    const customDefaultPrices = {
+      'portaltimetestdemo': '15 stars',
+      'portalretimetest': '25 stars',
+      'portal3fe': '150 stars',
+      'portalbigedition': 'free',
+      'pvznewmoddingmod': '100 stars',
+      'pvznewmoddingmodmobile': '75 stars',
+      'pvznewmoddingmodremastered': 'premium',
+      'countryballstale1remastered': '15 stars',
+      'bgtoolspack': 'free',
+      'bgpackinstall': 'free',
+      'bgpackuninstall': 'free',
+      'crashversegame20': 'free',
+      'easygameunity': 'free',
+      'aienglish': 'free',
+      'newlifesimulator_mod': 'free',
+      'minecraftalphatest': 'free',
+      'erfastmessage': 'free'
+    };
+
+    let developersList = [
+      {
+        id: 'error669966',
+        name: 'Error669966',
+        avatar: 'https://i.ibb.co/fzhqypKt/photo-2026-03-10-10-08-52.jpg',
+        tg: 'https://t.me/Super_Minepro',
+        tags: [
+          { text: 'OWNER', class: 'prefix-red' },
+          { text: 'ERROR', class: 'prefix-blue-red' },
+          { text: 'CODER', class: 'prefix-purple' }
+        ],
+        giftsAll: true
+      },
+      {
+        id: 'holyslav',
+        name: 'HolySlav',
+        avatar: 'https://i.ibb.co/mFBvSKxC/svit.jpg',
+        tg: 'https://t.me/SvitHolySlav',
+        tags: [
+          { text: 'GL. ADMIN', class: 'prefix-red' },
+          { text: 'DEV', class: 'prefix-maroon' }
+        ]
+      },
+      {
+        id: 'whsss1233',
+        name: 'Whsss1233',
+        avatar: 'https://i.ibb.co/d4fgJKWv/image.jpg',
+        tg: '(скрыто)',
+        tags: [
+          { text: 'BOOSTER', class: 'prefix-pink' },
+          { text: 'HELPER', class: 'prefix-yellow' },
+          { text: 'TESTER', class: 'prefix-gray' }
+        ]
+      },
+      {
+        id: 'marat',
+        name: 'Marat CountryBalls',
+        avatar: 'https://i.ibb.co/qPtkw5S/Marat.jpg',
+        tg: 'https://t.me/Just_Marat02',
+        tags: [
+          { text: 'HELPER', class: 'prefix-yellow' },
+          { text: 'Z. OWNER', class: 'prefix-red' },
+          { text: 'OLD', class: 'prefix-white' }
+        ]
+      },
+      {
+        id: 'lirik',
+        name: 'The LIRIK',
+        avatar: 'https://i.ibb.co/JRqRjbGk/okak.jpg',
+        tg: 'https://t.me/Kiruha_1',
+        tags: [
+          { text: 'USER', class: 'prefix-gray' },
+          { text: 'OLD', class: 'prefix-white' }
+        ]
+      },
+      {
+        id: 'sanhds',
+        name: 'Sanhds',
+        avatar: 'https://i.ibb.co/jvNp06WR/Sanhds.jpg',
+        tg: '(скрыто)',
+        tags: [
+          { text: 'HELPER', class: 'prefix-yellow' },
+          { text: 'OLD', class: 'prefix-white' }
+        ]
+      },
+      {
+        id: 'v2',
+        name: 'V2',
+        avatar: 'https://i.ibb.co/r2s3TmTR/V2.jpg',
+        tg: 'https://t.me/DeltarynCehodni',
+        tags: [
+          { text: 'DESIGN', class: 'prefix-cyan' },
+          { text: 'HELPER', class: 'prefix-yellow' }
+        ]
+      },
+      {
+        id: 'icebox',
+        name: 'ICE BOX',
+        avatar: 'https://i.ibb.co/mVCgBjMr/ICE-BOX.jpg',
+        tg: 'https://t.me/ICE_BOX4444',
+        tags: [
+          { text: 'HELPER', class: 'prefix-yellow' }
+        ]
+      },
+      {
+        id: 'pamchill',
+        name: 'Pamchill',
+        avatar: 'https://i.ibb.co/JDTHhjb/photo-2026-10-12-11-22-51.jpg',
+        tg: '(скрыто)',
+        tags: [
+          { text: 'TESTER', class: 'prefix-gray' },
+          { text: 'BOOSTER', class: 'prefix-pink' }
+        ]
+      }
+    ];
+
+    let socialsList = [
+      { name: 'ErrorMessageChannel', color: 'red', url: 'https://t.me/biggamesstudiochannel' },
+      { name: 'ErrorMessageChannel #2', color: 'red', url: 'https://t.me/biggamesstudio' },
+      { name: 'ErrorMessageChannel #3', color: 'red', url: 'https://t.me/biggamesstudio' },
+      { name: 'ErrorMessageChat', color: 'red', url: 'https://t.me/biggamesstudio' },
+      { name: 'ErrorMessageServer', color: 'red', url: 'https://discord.gg/YsTqDSpDg' },
+      { name: 'CorvoxChannel', color: 'red', url: 'https://corvox-chat.com/biggameschannel' },
+      { name: 'CorvoxChat', color: 'red', url: 'https://corvox-chat.com/biggameschat' },
+      { name: 'CorvoxServer', color: 'red', url: 'https://corvox-chat.com/1ff2289c40b070982afa146f' },
+      { name: 'YouTube', color: 'red', url: 'https://youtube.com/@biggames-d4b?si=kiEXdKUR1pQnVaF5' },
+      { name: 'OK', color: 'red', url: '#' },
+
+      { name: 'TelegramChannel', color: 'blue', url: 'https://t.me/biggamesstudiochannel' },
+      { name: 'TelegramChat', color: 'blue', url: 'https://t.me/biggamesstudio' },
+      { name: 'TelegramChannel #2', color: 'blue', url: 'https://t.me/portal_three' },
+      { name: 'TelegramChannel #3', color: 'blue', url: 'https://t.me/crashverse_battles' },
+      { name: 'Bilibili', color: 'blue', url: '#' },
+      { name: 'Skype', color: 'blue', url: '#' },
+      { name: 'VK', color: 'blue', url: '#' },
+      { name: 'TelegramSupport', color: 'blue', url: 'https://t.me/biggamesstudio_bot' },
+
+      { name: 'SeferStudio', color: 'gray', url: 'https://sefer-studio.ru/profile?username=Error669966' },
+      { name: 'TikTok', color: 'gray', url: '#' },
+      { name: 'TikTok Lite', color: 'gray', url: '#' },
+      { name: 'Likee', color: 'gray', url: '#' },
+      { name: 'Twitter', color: 'gray', url: '#' },
+      { name: 'RuTube', color: 'gray', url: '#' },
+
+      { name: 'WhatsApp', color: 'green', url: '#' },
+
+      { name: 'Viber', color: 'purple', url: '#' },
+      { name: 'Twitch', color: 'purple', url: 'https://www.twitch.tv/errorgamesstudio' },
+      { name: 'MAX', color: 'purple', url: '#' },
+      { name: 'Instagram', color: 'purple', url: '#' },
+
+      { name: 'Discord', color: 'green', url: 'https://discord.gg/YsTqDSpDg' },
+      { name: 'Студия OpenPage', color: 'green', url: 'https://t.me/biggamesstudio' },
+      { name: 'Телеграм канал студии', color: 'green', url: 'https://t.me/biggamesstudiochannel' },
+      { name: 'Телеграм поддержка', color: 'green', url: 'https://t.me/biggamesstudio_bot' },
+      { name: 'Личный Telegram ЛС', color: 'green', url: 'https://t.me/Super_Minepro' },
+      { name: 'Личный YouTube канал', color: 'green', url: 'https://youtube.com/@dungeosminecrafter?si=3MEtY66nwhsDlsHL' },
+      { name: 'Corvox Сервер (Резерв)', color: 'green', url: 'https://corvox-chat.com/BigGames%20Server' }
+    ];
+
+    const database = {
+      games: [
+        { name: 'PortalTimeTest', id: 'portaltimetestdemo' },
+        { name: 'Portal ReTimeTest', id: 'portalretimetest' },
+        { name: 'PvZ TypoPushkaMod', id: 'pvztypopushkamod' },
+        { name: 'PvZ PlusPlus', id: 'pvzplusplus' },
+        { name: 'PvZ PlusPlusPro', id: 'pvzpluspluspro' },
+        { name: 'PvZ 2 PlusPlus', id: 'pvz2plusplus' },
+        { name: 'Portal 3 FE', id: 'portal3fe' },
+        { name: 'Portal BigEdition', id: 'portalbigedition' },
+        { name: 'Crashverse Battles', id: 'crashversebattles' },
+        { name: 'CrashverseBattles Mobile', id: 'crashversebattlesmobile' },
+        { name: 'PvZ NewModdingMod', id: 'pvznewmoddingmod' },
+        { name: 'PvZ NewModdingMod Mobile', id: 'pvznewmoddingmodmobile' },
+        { name: 'PvZ NewModdingMod Remastered', id: 'pvznewmoddingmodremastered' },
+        { name: 'UNDERLOVE', id: 'underlove' },
+        { name: 'CountryBallsTale 1', id: 'countryballstale1' },
+        { name: 'CountryBallsTale 2: Magic', id: 'countryballstale2magic' },
+        { name: 'CountryBallsTale 3: Dungeons', id: 'countryballstale3dungeons' },
+        { name: 'CountryBallsTale 4: Animals', id: 'countryballstale4animals' },
+        { name: 'CountryBallsTale 1: Remastered', id: 'countryballstale1remastered' },
+        { name: 'CountryBallsTale 4 Google', id: 'countryballstale4google' },
+        { name: 'CountryLocation', id: 'countrylocation' },
+        { name: 'PvZ NewReplanted', id: 'pvznewreplanted' },
+        { name: 'NewLifeSimulator', id: 'newlifesimulator' },
+        { name: 'NewLifeSimulator 2', id: 'newlifesimulator2' },
+        { name: 'ArmyLife', id: 'armylife' },
+        { name: 'CRASHVERSE GAME 2.0', id: 'crashversegame20' }
+      ],
+      apps: [
+        { name: '📌 BigGames', id: 'biggames' },
+        { name: 'BG GameCreator', id: 'bggamecreator' },
+        { name: 'MultiLauncherMinecraft', id: 'multilauncherminecraft' },
+        { name: 'BaseAiStudio', id: 'baseaistudio' },
+        { name: 'SpriteAnimator', id: 'spriteanimator' },
+        { name: 'SpriteAnimator 2', id: 'spriteanimator2' },
+        { name: 'AutoCoder', id: 'autocoder' },
+        { name: 'ER NewVideoEditor', id: 'ernewvideoeditor' },
+        { name: 'BG AnimatedStudio', id: 'bganimatedstudio' },
+        { name: 'BG AntiVirus', id: 'bgantivirus' },
+        { name: 'BG AudioEditor', id: 'bgaudioeditor' },
+        { name: 'BG BusinessCalc', id: 'bgbusinesscalc' },
+        { name: 'BG BusinessTab', id: 'bgbusinesstab' },
+        { name: 'BG CodeEditor', id: 'bgcodeeditor' },
+        { name: 'BG CountryBallsTaleLauncher', id: 'bgcountryballstalelauncher' },
+        { name: 'BG DocumentEditor', id: 'bgdocumenteditor' },
+        { name: 'BG DreamNightmare', id: 'bgdreamnightmare' },
+        { name: 'BG MediaConvert', id: 'bgmediaconvert' },
+        { name: 'BG MediaLook', id: 'bgmedialook' },
+        { name: 'BG MediaPlayer', id: 'bgmediaplayer' },
+        { name: 'BG PCHelper', id: 'bgpchelper' },
+        { name: 'BG PhotoEditor', id: 'bgphotoeditor' },
+        { name: 'BG PictureHelper', id: 'bgpicturehelper' },
+        { name: 'BG Sprite Illustrator', id: 'bgspriteillustrator' },
+        { name: 'BG TextEditor', id: 'bgtexteditor' },
+        { name: 'BG VideoEditor', id: 'bgvideoeditor' },
+        { name: 'BG VirusCreator', id: 'bgviruscreator' },
+        { name: 'BG WinnerMessage', id: 'bgwinnermessage' },
+        { name: 'BG MusicCreator', id: 'bgmusiccreator' },
+        { name: 'BG PackInstall', id: 'bgpackinstall_app' },
+        { name: 'BG PackUninstall', id: 'bgpackuninstall_app' },
+        { name: 'BG PhotoEditor Web', id: 'bgphotoeditorweb' },
+        { name: 'BG PhotoEditorBase', id: 'bgphotoeditorbase' },
+        { name: 'BG ProjectHelper', id: 'bgprojecthelper' },
+        { name: 'BG TVLook', id: 'bgtvlook' },
+        { name: 'BG UniversalLauncher', id: 'bguniversallauncher' },
+        { name: 'BG VideoCreator', id: 'bgvideocreator' },
+        { name: 'BG VisualEmulator', id: 'bgvisualemulator' },
+        { name: 'BG WinLauncher', id: 'bgwinlauncher' },
+        { name: 'EasyGameUnity', id: 'easygameunity' },
+        { name: 'AI English', id: 'aienglish' },
+        { name: 'ErrorMessage Mobile', id: 'errormessagemobile' }
+      ],
+      programs: [
+        { name: 'BG: ToolsPack', id: 'bgtoolspack' },
+        { name: 'BG PackInstall', id: 'bgpackinstall' },
+        { name: 'BG PackUninstall', id: 'bgpackuninstall' },
+        { name: 'TierMaker', id: 'tiermaker' },
+        { name: 'AI Studio', id: 'aistudio' },
+        { name: 'Android', id: 'android' },
+        { name: 'SmartPhone', id: 'smartphone' },
+        { name: 'IPhone', id: 'iphone' },
+        { name: 'IPad', id: 'ipad' },
+        { name: 'Laptop', id: 'laptop' },
+        { name: 'PC', id: 'pc' },
+        { name: 'Windows Phone', id: 'windowsphone' },
+        { name: 'Tablet', id: 'tablet' },
+        { name: 'OldSmartPhone', id: 'oldsmartphone' },
+        { name: 'ButtonPhone', id: 'buttonphone' },
+        { name: 'push-button telephone', id: 'pushbuttontelephone' },
+        { name: 'TelePhone', id: 'telephone' },
+        { name: 'TV', id: 'tv' },
+        { name: 'SmartTV', id: 'smarttv' },
+        { name: 'AppleTV', id: 'appletv' },
+        { name: 'PS Vita', id: 'psvita' },
+        { name: 'SEGA', id: 'sega' },
+        { name: 'Nintendo Switch', id: 'nintendoswitch' },
+        { name: 'Nintendo Switch Oled', id: 'nintendoswitcholed' },
+        { name: 'Nintendo 3DS', id: 'nintendo3ds' },
+        { name: 'Nintendo Switch Lite', id: 'nintendoswitchlite' },
+        { name: 'Xbox', id: 'xbox' },
+        { name: 'Playstation 3', id: 'playstation3' },
+        { name: 'Playstation 5', id: 'playstation5' },
+        { name: 'LegacyConsole', id: 'legacyconsole' },
+        { name: 'ER Windows MSDOS', id: 'erwindowsmsdos' },
+        { name: 'ER Windows 1.0', id: 'erwindows10' },
+        { name: 'ER Windows 1.0X', id: 'erwindows10x' },
+        { name: 'ER Windows 2.0', id: 'erwindows20' },
+        { name: 'ER Windows 2.10', id: 'erwindows210' },
+        { name: 'ER Windows 2.11', id: 'erwindows211' },
+        { name: 'ER Windows 3.0', id: 'erwindows30' },
+        { name: 'ER Windows 3.1', id: 'erwindows31' },
+        { name: 'ER Windows 3.10', id: 'erwindows310' },
+        { name: 'ER Windows 3.11', id: 'erwindows311' },
+        { name: 'ER Windows Cougar', id: 'erwindowscougar' },
+        { name: 'ER Windows NT', id: 'erwindowsnt' },
+        { name: 'ER Windows Chicago', id: 'erwindowschicago' },
+        { name: 'ER Windows Memphis', id: 'erwindowsmemphis' },
+        { name: 'ER Windows 95', id: 'erwindows95' },
+        { name: 'ER Windows 96', id: 'erwindows96' },
+        { name: 'ER Windows 98', id: 'erwindows98' },
+        { name: 'ER Windows 2000', id: 'erwindows2000' },
+        { name: 'ER Windows XP', id: 'erwindowsxp' },
+        { name: 'ER Windows ME', id: 'erwindowsme' },
+        { name: 'ER Windows Whistler', id: 'erwindowswhistler' },
+        { name: 'ER Windows Longhorn', id: 'erwindowslonghorn' },
+        { name: 'ER Windows Vista', id: 'erwindowsvista' },
+        { name: 'ER Windows 7', id: 'erwindows7' },
+        { name: 'ER Windows Samsung', id: 'erwindowssamsung' },
+        { name: 'ER Windows 8', id: 'erwindows8' },
+        { name: 'ER Windows 8.1', id: 'erwindows81' },
+        { name: 'ER Windows Longhorn 2.0', id: 'erwindowslonghorn20' },
+        { name: 'ER Windows Kids', id: 'erwindowskids' },
+        { name: 'ER Windows Police', id: 'erwindowspolice' },
+        { name: 'ER Windows 10 (First)', id: 'erwindows10first' },
+        { name: 'ER Windows Technical Prewiew', id: 'erwindowstechnicalprewiew' },
+        { name: 'ER Windows 11', id: 'erwindows11' },
+        { name: 'ER Windows 11 K2', id: 'erwindows11k2' },
+        { name: 'ER Windows CyberPunk Edition', id: 'erwindowscyberpunkedition' },
+        { name: 'ER Windows 12', id: 'erwindows12' },
+        { name: 'ER Windows 13', id: 'erwindows13' },
+        { name: 'ER Windows 14', id: 'erwindows14' },
+        { name: 'ER WIndows 15', id: 'erwindows15' },
+        { name: 'ER Windows 16', id: 'erwindows16' },
+        { name: 'ER Windows 17', id: 'erwindows17' },
+        { name: 'ER Windows 18', id: 'erwindows18' },
+        { name: 'ER Windows XP Zver', id: 'erwindowsxpzver' },
+        { name: 'ER Windows 10 (BigGames)', id: 'erwindows10biggames' },
+        { name: 'ER Windows 9', id: 'erwindows9' }
+      ],
+      books: [
+        { name: 'Crashverse(Animated)', id: 'crashverseanimated' },
+        { name: 'Crashverse', id: 'crashverse' }
+      ],
+      mods: [
+        { name: 'PalSphereFix_P', id: 'palspherefixp' },
+        { name: 'Error OS', id: 'erroros' },
+        { name: 'NewLifeSimulator', id: 'newlifesimulator_mod' },
+        { name: 'Minecraft Alpha TEST', id: 'minecraftalphatest' },
+        { name: 'ER FastMessage', id: 'erfastmessage' }
+      ],
+      assets: [
+        { name: 'CountryBallsTaleAssets', id: 'countryballstaleassets' }
+      ]
+    };
+
+    let projectParamsData = {
+      'countryballstale1': { engine: 'GameMaker', lang: 'GameMaker', format: 'exe', platforms: ['Windows'] },
+      'countryballstale2magic': { engine: 'GameMaker', lang: 'GameMaker', format: 'exe', platforms: ['Windows'] },
+      'countryballstale3dungeons': { engine: 'GameMaker', lang: 'GameMaker', format: 'exe', platforms: ['Windows'] },
+      'countryballstale4google': { engine: 'Google AI', lang: 'TypeScript', format: 'bat', platforms: ['Windows'] },
+      'countryballstale1remastered': { engine: 'ClickTeam Fusion', lang: '-', format: 'exe', platforms: ['Windows'] },
+      
+      'pvztypopushkamod': { engine: 'VisualStudio', lang: 'C++', format: 'exe (zip)', platforms: ['Windows'] },
+      'crashversebattles': { engine: 'VisualStudio', lang: 'C++', format: 'exe', platforms: ['Windows'] },
+      'pvznewmoddingmod': { engine: 'VisualStudio', lang: 'C++', format: 'exe', platforms: ['Windows'] },
+      'pvznewreplanted': { engine: 'VisualStudio', lang: 'C++', format: 'exe', platforms: ['Windows'] },
+      'portalbigedition': { engine: 'VisualStudio', lang: 'C++', format: 'exe', platforms: ['Windows'] },
+
+      'crashversebattlesmobile': { engine: 'VisualStudio', lang: 'C#', format: 'apk', platforms: ['Android'] },
+      'pvznewmoddingmodmobile': { engine: 'VisualStudio', lang: 'C#', format: 'apk', platforms: ['Android'] },
+
+      'newlifesimulator': { engine: 'Gemini AI', lang: 'TypeScript', format: 'bat (html)', platforms: ['Windows'] },
+      'portal3fe': { engine: 'Google AI', lang: 'JavaScript', format: 'bat', platforms: ['Windows'] },
+
+      'pvznewmoddingmodremastered': { engine: 'NewCatroid', lang: '-', format: 'apk', platforms: ['Android'] },
+      'portaltimetestdemo': { engine: 'PocketCode', lang: '-', format: 'apk', platforms: ['Android'] },
+
+      'crashverse': { engine: 'Wattpad', lang: '-', format: '-', platforms: ['Windows', 'Linux', 'Android'] },
+      'crashverseanimated': { engine: '-', lang: '-', format: '-', platforms: ['Windows'] },
+      'palspherefixp': { engine: '-', lang: '-', format: 'pak', platforms: ['Linux', 'Windows'] },
+
+      'armylife': { engine: 'RenPy', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'underlove': { engine: 'RenPy', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+
+      'portalretimetest': { engine: 'Google AI', lang: 'html', format: 'bat', platforms: ['Windows'] },
+      'pvzplusplus': { engine: 'VisualStudio', lang: 'C', format: 'exe', platforms: ['Windows'] },
+      'pvzpluspluspro': { engine: 'VisualStudio', lang: 'C', format: 'exe', platforms: ['Windows'] },
+      'newlifesimulator2': { engine: 'Google AI', lang: 'html', format: 'bat', platforms: ['Windows'] },
+      'countrylocation': { engine: 'Google AI', lang: 'html', format: 'bat', platforms: ['Windows'] },
+      'pvz2plusplus': { engine: '-', lang: '-', format: 'apk', platforms: ['Android'] },
+
+      'biggames': { engine: '-', lang: '-', format: 'exe', platforms: ['Windows', 'Linux', 'Android'] },
+      'bggamecreator': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'multilauncherminecraft': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'baseaistudio': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'spriteanimator': { engine: '-', lang: '-', format: 'exe', platforms: ['Windows'] },
+      'spriteanimator2': { engine: '-', lang: '-', format: 'exe', platforms: ['Windows'] },
+      'autocoder': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'ernewvideoeditor': { engine: 'Google AI', lang: 'html', format: 'bat', platforms: ['Windows'] },
+
+      'countryballstaleassets': { engine: '-', lang: '-', format: '-', platforms: ['Windows'] },
+      'erroros': { engine: '-', lang: '-', format: 'iso', platforms: ['Windows'] },
+
+      'crashversegame20': { engine: 'NewCatroid', lang: '-', format: 'apk', platforms: ['Android'] },
+      'easygameunity': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'aienglish': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'newlifesimulator_mod': { engine: '-', lang: '-', format: 'exe', platforms: ['Windows'] },
+      'minecraftalphatest': { engine: '-', lang: '-', format: 'bat', platforms: ['Windows'] },
+      'erfastmessage': { engine: '-', lang: '-', format: 'exe', platforms: ['Windows'] },
+      'erwindows9': { engine: 'html', lang: 'JavaScript', format: 'exe', platforms: ['Windows'] },
+      'errormessagemobile': { engine: '-', lang: '-', format: 'apk', platforms: ['Android'] }
+    };
+
+    let mainTxtData = {
+      'portaltimetestdemo': {
+        id: 'portaltimetestdemo',
+        name: 'PortalTimeTest',
+        shows: [
+          'Это простенькая фан игра по порталу, сделана в PocketCode',
+          'Движок: PocketCode, Язык програмированния: отсутствует, Формат apk, Для: Андроид',
+          'Я в тг openpage "https://t.me/Super_Minepro"'
+        ],
+        downloads: [
+          { title: 'Telegram', url: 'https://t.me/Super_Minepro' },
+          { title: 'SeferStudio', url: 'https://sefer-studio.ru/game_page?id=190' }
+        ],
+        screens: {
+          '1': 'https://i.ibb.co/zhn3Mj1d/photo-2-2026-09-22-13-22-31.jpg',
+          '2': 'https://i.ibb.co/zhn3Mj1d/photo-2-2026-09-22-13-22-31.jpg'
+        }
+      }
+    };
+
+    let pricesData = {};
+    let aboutData = { texts: [], links: [] };
+    let currentTab = 'home';
+    let currentLogoType = 'biggames';
+
+    let currentTheme = 'dark';
+    let isSansVisible = false;
+    let isMusicPlaying = false;
+
+    const gridContainer = document.getElementById('gridContainer');
+    const staticPageContainer = document.getElementById('staticPageContainer');
+    const controlsBar = document.getElementById('controlsBar');
+    const searchInput = document.getElementById('searchInput');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalId = document.getElementById('modalId');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalGallery = document.getElementById('modalGallery');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalDownloads = document.getElementById('modalDownloads');
+
+    const devModalOverlay = document.getElementById('devModalOverlay');
+    const devModalClose = document.getElementById('devModalClose');
+    const devModalAvatar = document.getElementById('devModalAvatar');
+    const devModalName = document.getElementById('devModalName');
+    const devModalTags = document.getElementById('devModalTags');
+    const devModalTg = document.getElementById('devModalTg');
+    const devModalGifts = document.getElementById('devModalGifts');
+    const sansOverlay = document.getElementById('sansOverlay');
+
+    const musicModalOverlay = document.getElementById('musicModalOverlay');
+    const musicModalClose = document.getElementById('musicModalClose');
+    const applyMusicBtn = document.getElementById('applyMusicBtn');
+    const youtubeUrlInput = document.getElementById('youtubeUrlInput');
+    const musicFloatingPlayer = document.getElementById('musicFloatingPlayer');
+    const youtubeIframeContainer = document.getElementById('youtubeIframeContainer');
+    const closeFloatingPlayerBtn = document.getElementById('closeFloatingPlayerBtn');
+    const playerTitleText = document.getElementById('playerTitleText');
+
+    function init() {
+      setupEvents();
+      renderTab(currentTab);
+    }
+
+    function setupEvents() {
+      document.getElementById('navTabs').addEventListener('click', (e) => {
+        if (e.target.classList.contains('nav-tab')) {
+          document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+          renderTab(e.target.dataset.tab);
+        }
+      });
+
+      document.getElementById('logoHomeBtn').addEventListener('click', () => {
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        const homeTab = document.querySelector('.nav-tab[data-tab="home"]');
+        if (homeTab) homeTab.classList.add('active');
+        renderTab('home');
+      });
+
+      searchInput.addEventListener('input', () => renderTab(currentTab));
+
+      document.getElementById('txtFileInput').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => parseMainTxt(event.target.result);
+          reader.readAsText(file);
+        }
+      });
+
+      modalClose.addEventListener('click', closeModal);
+      devModalClose.addEventListener('click', closeDevModal);
+      musicModalClose.addEventListener('click', () => musicModalOverlay.classList.remove('active'));
+
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeModal();
+      });
+      devModalOverlay.addEventListener('click', (e) => {
+        if (e.target === devModalOverlay) closeDevModal();
+      });
+      musicModalOverlay.addEventListener('click', (e) => {
+        if (e.target === musicModalOverlay) musicModalOverlay.classList.remove('active');
+      });
+
+      closeFloatingPlayerBtn.addEventListener('click', stopMusic);
+
+      applyMusicBtn.addEventListener('click', () => {
+        const url = youtubeUrlInput.value.trim();
+        const ytId = extractYouTubeId(url);
+        const twitchChannel = extractTwitchChannel(url);
+
+        if (ytId) {
+          playYouTube(ytId);
+          musicModalOverlay.classList.remove('active');
+        } else if (twitchChannel) {
+          playTwitch(twitchChannel);
+          musicModalOverlay.classList.remove('active');
+        } else {
+          alert('Некорректная ссылка на YouTube или Twitch');
+        }
+      });
+    }
+
+    function playYouTube(videoId) {
+      isMusicPlaying = true;
+      playerTitleText.innerText = '🎵 Фоновая музыка (YouTube)';
+      youtubeIframeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      musicFloatingPlayer.style.display = 'flex';
+      updateMusicButtonState();
+    }
+
+    function playTwitch(channel) {
+      isMusicPlaying = true;
+      playerTitleText.innerText = `🔴 Стрим Twitch: ${channel}`;
+      const parentDomain = window.location.hostname || 'localhost';
+      youtubeIframeContainer.innerHTML = `<iframe src="https://player.twitch.tv/?channel=${channel}&parent=${parentDomain}&autoplay=true" allowfullscreen></iframe>`;
+      musicFloatingPlayer.style.display = 'flex';
+      updateMusicButtonState();
+    }
+
+    function stopMusic() {
+      isMusicPlaying = false;
+      youtubeIframeContainer.innerHTML = '';
+      musicFloatingPlayer.style.display = 'none';
+      updateMusicButtonState();
+    }
+
+    function updateMusicButtonState() {
+      const btn = document.getElementById('musicToggleBtn');
+      if (btn) {
+        btn.innerText = isMusicPlaying ? 'Выключить медиаплеер' : 'Включить музыку';
+        btn.classList.toggle('active', isMusicPlaying);
+      }
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+    }
+
+    function closeDevModal() {
+      devModalOverlay.classList.remove('active');
+    }
+
+    function openModal(item) {
+      modalTitle.innerText = item.name;
+      modalId.innerText = `ID: ${item.id}`;
+
+      const price = getItemPrice(item);
+      const priceCat = getPriceCategory(price);
+      modalPrice.innerHTML = `<span class="price-tag tag-${priceCat}">💰 Цена: ${price}</span>`;
+
+      const params = projectParamsData[item.id] || { engine: '-', lang: '-', format: '-', platforms: ['Windows'] };
+
+      const engColor = engineColors[params.engine] || '#8e8e9e';
+      const langColor = langColors[params.lang] || '#8e8e9e';
+
+      document.getElementById('paramEngine').innerHTML = `<span class="param-badge" style="border: 1px solid ${engColor}; color: ${engColor};">${params.engine}</span>`;
+      document.getElementById('paramLang').innerHTML = `<span class="param-badge" style="border: 1px solid ${langColor}; color: ${langColor};">${params.lang}</span>`;
+      document.getElementById('paramFormat').innerText = params.format;
+
+      let platformHtml = '';
+      params.platforms.forEach(p => {
+        if (platformIcons[p]) {
+          platformHtml += `<img src="${platformIcons[p]}" alt="${p}" title="${p}" class="platform-icon">`;
+        }
+      });
+      document.getElementById('paramPlatform').innerHTML = platformHtml || '-';
+
+      let authorName = 'Error669966';
+      let authorId = 'error669966';
+      const lowerName = item.name.toLowerCase();
+      const lowerId = item.id.toLowerCase();
+      
+      if (lowerName.includes('errormessage') || lowerId.includes('errormessage') || 
+          lowerName.includes('spriteanimator') || lowerId.includes('spriteanimator') || 
+          lowerName.includes('ai studio') || lowerId.includes('aistudio')) {
+        authorName = 'HolySlav';
+        authorId = 'holyslav';
+      }
+
+      const authorObj = developersList.find(d => d.id === authorId);
+      if (authorObj) {
+        document.getElementById('paramAuthor').innerHTML = `
+          <div class="author-widget" onclick="openDevModal(developersList.find(d => d.id === '${authorId}'))">
+            <img src="${authorObj.avatar}" alt="${authorObj.name}">
+            <span>${authorObj.name}</span>
+          </div>
+        `;
+      } else {
+        document.getElementById('paramAuthor').innerText = authorName;
+      }
+
+      const data = mainTxtData[item.id] || { shows: [], downloads: [], screens: {} };
+
+      modalGallery.innerHTML = '';
+      for (let i = 1; i <= 4; i++) {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'gallery-item';
+        if (data.screens && data.screens[i]) {
+          itemDiv.innerHTML = `<img src="${data.screens[i]}" alt="Screen ${i}" onclick="window.open('${data.screens[i]}', '_blank')">`;
+        } else {
+          itemDiv.innerHTML = `<div class="no-img">Скриншот ${i}<br>отсутствует</div>`;
+        }
+        modalGallery.appendChild(itemDiv);
+      }
+
+      if (data.shows && data.shows.length > 0) {
+        modalDesc.innerHTML = data.shows.map(s => formatOpenPageText(s)).join('\n\n');
+      } else {
+        modalDesc.innerHTML = '<span style="color: var(--text-muted); font-style: italic;">Описание временно отсутствует</span>';
+      }
+
+      modalDownloads.innerHTML = '';
+      if (data.downloads && data.downloads.length > 0) {
+        data.downloads.forEach(dl => {
+          if (dl.url !== '-') {
+            const btn = document.createElement('a');
+            btn.className = 'btn-download-link';
+            btn.href = dl.url;
+            btn.target = '_blank';
+            btn.rel = 'noopener noreferrer';
+            btn.innerHTML = `📥 ${dl.title}`;
+            modalDownloads.appendChild(btn);
+          }
+        });
+      }
+
+      if (modalDownloads.children.length === 0) {
+        modalDownloads.innerHTML = '<div class="no-downloads">Ссылки для скачивания пока недоступны</div>';
+      }
+
+      modalOverlay.classList.add('active');
+    }
+
+    function getItemPrice(item) {
+      if (currentTab === 'apps' || currentTab === 'programs') {
+        return 'free';
+      }
+      if (pricesData[item.id]) return pricesData[item.id];
+      if (customDefaultPrices[item.id]) return customDefaultPrices[item.id];
+      return 'free';
+    }
+
+    function getPriceCategory(priceStr) {
+      const lower = priceStr.toLowerCase();
+      if (lower.includes('premium')) return 'premium';
+      if (lower.includes('stars') || lower.includes('star')) return 'stars';
+      return 'free';
+    }
+
+    function formatOpenPageText(str) {
+      if (!str) return '';
+      const openpageRegex = /openpage\s*["']?([^"'\s]+)["']?/gi;
+      let hasOpenpage = false;
+      let formatted = str.replace(openpageRegex, (match, url) => {
+        hasOpenpage = true;
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+      });
+      
+      if (!hasOpenpage && str.startsWith('http')) {
+        return `<a href="${str}" target="_blank" rel="noopener noreferrer">${str}</a>`;
+      }
+      return formatted;
+    }
+
+    function parseMainTxt(text) {
+      pricesData = {};
+      aboutData = { texts: [], links: [] };
+
+      const lines = text.split('\n');
+      let currentBlock = [];
+      let blocks = [];
+
+      lines.forEach(line => {
+        let clean = line.split('#')[0].trim();
+        if (clean) currentBlock.push(clean);
+        if (clean.includes(')')) {
+          blocks.push(currentBlock.join('\n'));
+          currentBlock = [];
+        }
+      });
+      if (currentBlock.length > 0) blocks.push(currentBlock.join('\n'));
+
+      blocks.forEach(blockStr => {
+        const blockLines = blockStr.split('\n').map(l => l.trim()).filter(l => l && l !== '(' && l !== ')');
+        let itemData = { id: '', name: '', shows: [], downloads: [], screens: {} };
+
+        blockLines.forEach(line => {
+          let lower = line.toLowerCase();
+          if (lower.startsWith('id')) {
+            let m = line.match(/^id\s*[:-]\s*(.+)$/i);
+            if (m) itemData.id = m[1].trim().toLowerCase();
+          } 
+          else if (lower.startsWith('name')) {
+            let m = line.match(/^name\s*[:-]\s*(.+)$/i);
+            if (m) itemData.name = m[1].trim().replace(/^["']|["']$/g, '');
+          } 
+          else if (lower.startsWith('show')) {
+            let m = line.match(/^show\s*[:-]\s*(.+)$/i);
+            if (m) itemData.shows.push(m[1].trim().replace(/^["']|["']$/g, ''));
+          } 
+        });
+
+        if (itemData.id) {
+          mainTxtData[itemData.id] = itemData;
+        }
+      });
+
+      renderTab(currentTab);
+    }
+
+    function updateLogoStyle() {
+      const box = document.getElementById('headerLogoBox');
+      if (!box) return;
+      box.className = 'logo-box';
+      if (currentLogoType === 'biggames') {
+        box.classList.add('logo-biggames');
+        box.innerText = 'BG';
+      } else if (currentLogoType === 'errorgames') {
+        box.classList.add('logo-errorgames');
+        box.innerText = 'EG';
+      } else if (currentLogoType === 'glitchgames') {
+        box.classList.add('logo-glitchgames');
+        box.innerText = 'GG';
+      }
+    }
+
+    function renderTab(tab) {
+      currentTab = tab;
+      const searchQuery = searchInput.value.toLowerCase().trim();
+
+      if (['about', 'developers', 'settings', 'socials', 'home'].includes(tab)) {
+        gridContainer.style.display = 'none';
+        controlsBar.style.display = 'none';
+        staticPageContainer.style.display = 'block';
+        renderStaticPage(tab);
+        return;
+      }
+
+      gridContainer.style.display = 'grid';
+      controlsBar.style.display = 'flex';
+      staticPageContainer.style.display = 'none';
+
+      gridContainer.innerHTML = '';
+      const items = database[tab] || [];
+
+      const filtered = items.filter(item => 
+        item.name.toLowerCase().includes(searchQuery) || 
+        item.id.toLowerCase().includes(searchQuery)
+      );
+
+      if (filtered.length === 0) {
+        gridContainer.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;">Ничего не найдено</div>`;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const isReady = readyProjects.has(item.id);
+        const isHidden = hiddenProjects.has(item.id);
+        const price = getItemPrice(item);
+        const priceCat = getPriceCategory(price);
+
+        const tagClass = `tag-${priceCat}`;
+        const showAiBadge = (tab === 'apps' || tab === 'programs');
+
+        let statusBadgeHtml = '';
+        if (isReady) {
+          statusBadgeHtml = '<span class="badge badge-ready">Доступно</span>';
+        } else if (isHidden) {
+          statusBadgeHtml = '<span class="badge badge-hidden">Скрыто</span>';
+        } else {
+          statusBadgeHtml = '<span class="badge badge-dev">В разработке</span>';
+        }
+
+        const card = document.createElement('div');
+        card.className = `card`;
+        card.onclick = () => openModal(item);
+
+        card.innerHTML = `
+          <div>
+            <div class="card-header">
+              <div class="card-title-wrapper">
+                <div class="card-logo-frame" title="Логотип игры">LOGO</div>
+                <div class="card-title">${item.name}</div>
+              </div>
+              <div class="badge-container">
+                ${statusBadgeHtml}
+                ${showAiBadge ? '<span class="badge badge-ai">AI</span>' : ''}
+              </div>
+            </div>
+            <div class="card-id">ID: ${item.id}</div>
+            <div class="price-tag ${tagClass}">💰 Цена: ${price}</div>
+          </div>
+          <div class="card-footer">
+            <span style="font-size: 11px; color: var(--text-muted);">BigGames Studio</span>
+            <button class="card-btn">Открыть</button>
+          </div>
+        `;
+        gridContainer.appendChild(card);
+      });
+    }
+
+    function openDevModal(dev) {
+      devModalAvatar.src = dev.avatar;
+      devModalName.innerText = dev.name;
+      devModalTags.innerHTML = dev.tags.map(t => `<span class="prefix-tag ${t.class}">${t.text}</span>`).join('');
+      
+      if (dev.tg.startsWith('http')) {
+        devModalTg.innerHTML = `Мой лс в тг: <a href="${dev.tg}" target="_blank" rel="noopener noreferrer">${dev.tg}</a>`;
+      } else {
+        devModalTg.innerHTML = `Мой лс в тг: ${dev.tg}`;
+      }
+
+      devModalGifts.innerHTML = '';
+
+      let giftsToDisplay = [];
+      if (dev.giftsAll) {
+        giftsToDisplay = Object.values(giftsDictionary);
+      } else {
+        dev.tags.forEach(tag => {
+          let key = tag.text.toUpperCase();
+          if (giftsDictionary[key]) {
+            giftsToDisplay.push(giftsDictionary[key]);
+          }
+        });
+      }
+
+      if (giftsToDisplay.length > 0) {
+        giftsToDisplay.forEach(gift => {
+          const giftCard = document.createElement('div');
+          giftCard.className = 'gift-card';
+          giftCard.innerHTML = `
+            <img src="${gift.url}" alt="${gift.title}">
+            <div class="gift-title">${gift.title}</div>
+          `;
+          devModalGifts.appendChild(giftCard);
+        });
+      } else {
+        devModalGifts.innerHTML = `<div style="grid-column: 1/-1; color: var(--text-muted); font-size: 13px;">У разработчика пока нет подарков</div>`;
+      }
+
+      devModalOverlay.classList.add('active');
+    }
+
+    function renderStaticPage(tab) {
+      if (tab === 'home') {
+        staticPageContainer.innerHTML = `
+          <div class="static-page" style="margin-bottom: 30px;">
+            <h2>🔥 Главные ссылки</h2>
+            <div class="social-grid" style="margin-top: 10px;">
+              <a href="https://youtube.com/@biggames-d4b?si=kiEXdKUR1pQnVaF5" target="_blank" class="social-card color-red">
+                <div class="social-title">YouTube канал BigGames</div>
+                <div class="social-link-text">youtube.com/@biggames-d4b</div>
+              </a>
+              <a href="https://t.me/biggamesstudio" target="_blank" class="social-card color-blue">
+                <div class="social-title">Чат в Telegram BigGames</div>
+                <div class="social-link-text">t.me/biggamesstudio</div>
+              </a>
+              <a href="https://discord.gg/YsTqDSpDg" target="_blank" class="social-card color-red">
+                <div class="social-title">Сервер в ErrorMessage</div>
+                <div class="social-link-text">discord.gg/YsTqDSpDg</div>
+              </a>
+            </div>
+          </div>
+
+          <div class="static-page">
+            <h2>Добро пожаловать в BigGames!</h2>
+            <p>Мы группа людей что создает моды, приложения, игры а также любит самые разные игры. Если заинтересован присоеденяйся к нам!</p>
+            
+            <h3 style="margin-top: 30px;">Crashverse</h3>
+            <p>Crashverse это наше фанатское продолжение андерверса</p>
+            
+            <h3 style="margin-top: 20px;">Персонажи:</h3>
+            <p><strong>Jamer Sans:</strong> Санс что появился без души с уничтоженной вселенной но с душой создателя, Внешность: черный скелет носит черную майку и черную толстовку имеет черные шорты а также имеет свои новые кодер нити с помощью них он может взламывать различные объекты или просто атаковать и разрушать вселенные из обуви носит кроссовки а также имеет шрам рядом с левым глазом а сам левый глаз был расплывается примерно как у гено санса также как у инка имеет место для хранения флаконов но на этот раз с его созданными вселенными чтобы их никто не уничтожил среди них находятся все проекты из BigGames но особенно он защищает флакон с надписью Crashverse так как если он потеряет его то все спросится у джеймера есть несколько рядов флаконов и их очень много из за чего иногда он может запутаться при поиске флаконов за спиной носит два копья которыми он может атаковать физически а также кость которой он тоже может атаковать позже у него появится гигантский нож как у кросса но с эффектом души создателя в его кармане всегда лежит быстрый телепорт в его дом из омега таймлайна</p>
+            
+            <p><strong>История:</strong> Когда то давно существовал таймлайн кодерджейм тейл в нем был путь пацифиста и все было нормально до того как таймлайн был сломан икс гастером он телепортировал персонажей из икс тейла и они начали забирать души всех персонажей одним из них был кодерджейм санс после того как икс гастер забрал его душу он ее решил сохранить и добавил в тело способное выбирать любые стихии и превращаться в них так он стал всестихийный а таймлайн икс гастер попытался перезаписать но из за того что душа санса не была в таймлайне перезапись была не корректная и вместо нового кодерджейм санса появился джеймер санс то есть я и так как в вселенной не было душ всех предыдущих жителей и одной души санса не хватало при перезаписи произошла ошибка и сила создала нового санса или же меня но из за того что все остальные души были заняты я появился без души все что я чувствовал было лицемерием но я заметил одно но если я чувствую слишком много эмоций то я могу ее чувствовать такое случается редко. Также все атаки что я использовал были не моими их мне дал всестихийный он не был союзником икс гастера это была всего лишь игра иииии<br>Стоп а о чем я с тобой разговаривал а да всестихийный давал мне способности для победы над икс гастером я же сам не имею магии и могу только атаковать физически и оболочка моей души она состоит из души создателя я не чувствую эмоций но могу создавать вселенные персонажей и даже продолжать те или иные таймлайны но не могу изменять созданные мной таймлайны</p>
+
+            <p><strong>Характер:</strong> нет чувств, любит создавать игры и приложения, упрямый, ленивый, <span class="spoiler-toggle" onclick="this.nextElementSibling.classList.toggle('revealed')">[нажать, чтобы открыть]</span><span class="spoiler-content">[немного пошлый]</span>.</p>
+
+            <p><strong>Отношения:</strong> Paint Papyrus: друг, приятель; Nightmare Sans знакомый, приятель; DreamGirlSans жена jamer санса, напарник</p>
+
+            <p><strong>DreamGirlSans:</strong><br>Девушка санс созданный по вселенной Dreamtale<br><strong>История:</strong> позже<br><strong>Характер:</strong> похожий на Jamer санса</p>
+
+            <p><strong>Всестихийный санс:</strong><br>Тот кто был под шантажом несколько лет но смог одолеть его<br><strong>История:</strong> Был использован икс гастером для его целей<br><strong>Характер:</strong> жестокий, яростный<br><strong>Отношения:</strong> Jamer Sans союзник</p>
+
+            <p>Memory Sans, Giga sans, Elements sans - создания что созданы из тьмы...</p>
+
+            <p style="margin-top: 25px;">Понравился Crashverse? узнай его сюжет в его телеграмм канале:<br>
+            <a href="https://t.me/crashverse_battles" target="_blank" rel="noopener noreferrer">https://t.me/crashverse_battles</a></p>
+          </div>
+        `;
+      } else if (tab === 'socials') {
+        let socialsHtml = '';
+        socialsList.forEach(soc => {
+          socialsHtml += `
+            <a href="${soc.url}" target="_blank" rel="noopener noreferrer" class="social-card color-${soc.color}">
+              <div class="social-title">${soc.name}</div>
+              <div class="social-link-text">${soc.url !== '#' ? soc.url : 'Ссылка временно отсутствует'}</div>
+            </a>
+          `;
+        });
+
+        staticPageContainer.innerHTML = `
+          <div class="static-page">
+            <h2>Социальные сети и ресурсы</h2>
+            <p>Выберите платформу для перехода по кликабельной ссылке:</p>
+            <div class="social-grid">
+              ${socialsHtml}
+            </div>
+          </div>
+        `;
+      } else if (tab === 'about') {
+        let contentHtml = `<p><strong>BigGames</strong> — независимая студия разработки видеоигр, утилит, модификаций и приложений для ПК и мобильных устройств.</p>`;
+        staticPageContainer.innerHTML = `<div class="static-page"><h2>О нас</h2>${contentHtml}</div>`;
+      } else if (tab === 'developers') {
+        let devsHtml = '';
+        developersList.forEach(dev => {
+          let tagsHtml = dev.tags.map(t => `<span class="prefix-tag ${t.class}">${t.text}</span>`).join('');
+          devsHtml += `
+            <div class="dev-card" data-devid="${dev.id}">
+              <img class="dev-avatar" src="${dev.avatar}" alt="${dev.name}">
+              <div class="dev-info">
+                <div class="dev-name">${dev.name}</div>
+                <div class="dev-tags">${tagsHtml}</div>
+              </div>
+            </div>
+          `;
+        });
+
+        staticPageContainer.innerHTML = `
+          <div class="static-page">
+            <h2>Разработчики</h2>
+            <p>Команда BigGames Studio (нажмите на карточку для просмотра профиля):</p>
+            <div class="dev-grid">${devsHtml}</div>
+          </div>
+        `;
+
+        document.querySelectorAll('.dev-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const devId = card.getAttribute('data-devid');
+            const devObj = developersList.find(d => d.id === devId);
+            if (devObj) openDevModal(devObj);
+          });
+        });
+      } else if (tab === 'settings') {
+        staticPageContainer.innerHTML = `
+          <div class="static-page">
+            <h2>Настройки и конфигурация</h2>
+            <div class="settings-section">
+              <div class="setting-item">
+                <div class="setting-info">
+                  <div class="setting-title">Логотип портала</div>
+                  <div class="setting-desc">Выберите стиль логотипа в шапке сайта</div>
+                </div>
+                <select id="logoTypeSelect" class="select-input">
+                  <option value="biggames" ${currentLogoType === 'biggames' ? 'selected' : ''}>BigGames (стандартный)</option>
+                  <option value="errorgames" ${currentLogoType === 'errorgames' ? 'selected' : ''}>ErrorGames (красно-синий)</option>
+                  <option value="glitchgames" ${currentLogoType === 'glitchgames' ? 'selected' : ''}>GlitchGames (розовый)</option>
+                </select>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <div class="setting-title">Тема оформления</div>
+                </div>
+                <select id="themeSelect" class="select-input">
+                  <option value="dark" ${currentTheme === 'dark' ? 'selected' : ''}>Тёмная тема</option>
+                  <option value="light" ${currentTheme === 'light' ? 'selected' : ''}>Светлая тема</option>
+                </select>
+              </div>
+              <div class="setting-item" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                <div class="setting-info">
+                  <div class="setting-title">Фоновая музыка / Медиаплеер (YouTube / Twitch)</div>
+                  <div class="setting-desc">Вставьте ссылку на видео или прямой эфир и нажмите запустить</div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <input type="text" id="inlineYoutubeUrlInput" class="select-input" style="flex: 1;" placeholder="https://youtube.com/... или https://twitch.tv/...">
+                  <button id="inlineApplyMusicBtn" class="btn-toggle-music" style="background: #34c759;">Запустить</button>
+                </div>
+                <button id="musicToggleBtn" class="btn-toggle-music ${isMusicPlaying ? 'active' : ''}" style="margin-top: 5px;">
+                  ${isMusicPlaying ? 'Выключить медиаплеер' : 'Включить музыку'}
+                </button>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <div class="setting-title">Санс</div>
+                </div>
+                <button id="sansToggleBtn" class="btn-toggle-sans ${isSansVisible ? 'active' : ''}">
+                  ${isSansVisible ? 'Скрыть Санса' : 'Показать Санса'}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('logoTypeSelect').addEventListener('change', (e) => {
+          currentLogoType = e.target.value;
+          updateLogoStyle();
+        });
+
+        document.getElementById('themeSelect').addEventListener('change', (e) => {
+          currentTheme = e.target.value;
+          if (currentTheme === 'light') {
+            document.body.classList.add('light-theme');
+          } else {
+            document.body.classList.remove('light-theme');
+          }
+        });
+
+        document.getElementById('inlineApplyMusicBtn').addEventListener('click', () => {
+          const inputVal = document.getElementById('inlineYoutubeUrlInput').value.trim();
+          const ytId = extractYouTubeId(inputVal);
+          const twitchChannel = extractTwitchChannel(inputVal);
+
+          if (ytId) {
+            playYouTube(ytId);
+          } else if (twitchChannel) {
+            playTwitch(twitchChannel);
+          } else {
+            alert('Некорректная ссылка на YouTube или Twitch');
+          }
+        });
+
+        document.getElementById('sansToggleBtn').addEventListener('click', () => {
+          isSansVisible = !isSansVisible;
+          sansOverlay.style.display = isSansVisible ? 'block' : 'none';
+          const btn = document.getElementById('sansToggleBtn');
+          if (btn) {
+            btn.innerText = isSansVisible ? 'Скрыть Санса' : 'Показать Санса';
+            btn.classList.toggle('active', isSansVisible);
+          }
+        });
+
+        document.getElementById('musicToggleBtn').addEventListener('click', () => {
+          if (isMusicPlaying) {
+            stopMusic();
+          } else {
+            const inputVal = document.getElementById('inlineYoutubeUrlInput') ? document.getElementById('inlineYoutubeUrlInput').value.trim() : '';
+            const ytId = extractYouTubeId(inputVal);
+            const twitchChannel = extractTwitchChannel(inputVal);
+            if (ytId) playYouTube(ytId);
+            else if (twitchChannel) playTwitch(twitchChannel);
+            else alert('Пожалуйста, введите ссылку на YouTube или Twitch в поле настроек выше.');
+          }
+        });
+      }
+    }
+
+    function extractYouTubeId(url) {
+      if (!url) return null;
+      let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/|watch\?.+&v=))([\w-]{11})/);
+      return match ? match[1] : null;
+    }
+
+    function extractTwitchChannel(url) {
+      if (!url) return null;
+      let match = url.match(/(?:twitch\.tv\/)([\w_-]+)/i);
+      return match ? match[1] : null;
+    }
+
+    init();
+  </script>
+</body>
+</html>
