@@ -21,6 +21,7 @@
       --inner-box-bg: #0d0d11;
       --input-bg: var(--card-bg);
       --input-border: var(--card-border);
+      --icon-bg: rgba(255, 255, 255, 0.08);
       
       --price-free: #8e8e9e;
       --price-stars: #ffd60a;
@@ -41,6 +42,7 @@
       --inner-box-bg: #f8f8fc;
       --input-bg: #ffffff;
       --input-border: #d0d0dc;
+      --icon-bg: rgba(0, 0, 0, 0.06);
     }
 
     * {
@@ -222,6 +224,48 @@
       border-color: #52527a;
     }
 
+    .filter-chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      flex: 1 1 auto;
+      min-width: 0;
+      justify-content: flex-end;
+    }
+
+    .filter-chip {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .filter-chip:hover {
+      color: var(--text-main);
+      border-color: #52527a;
+    }
+
+    .filter-chip.active {
+      background: #007aff;
+      border-color: #007aff;
+      color: #ffffff;
+    }
+
+    .filter-group-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-left: 4px;
+      white-space: nowrap;
+    }
+
     main {
       flex: 1;
       padding: 10px 30px 40px 30px;
@@ -261,12 +305,15 @@
       align-items: flex-start;
       margin-bottom: 8px;
       gap: 10px;
+      min-width: 0;
     }
 
     .card-title-wrapper {
       display: flex;
       align-items: center;
       gap: 10px;
+      min-width: 0;
+      flex: 1 1 auto;
     }
 
     .card-logo-frame {
@@ -288,6 +335,10 @@
       font-weight: 700;
       color: var(--text-main);
       line-height: 1.3;
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .badge-container {
@@ -296,7 +347,9 @@
       align-items: center;
       gap: 4px;
       flex-wrap: wrap;
-      justify-content: flex-end;
+      justify-content: flex-start;
+      max-width: 100%;
+      margin-bottom: 10px;
     }
 
     .badge {
@@ -335,6 +388,12 @@
       letter-spacing: 0.5px;
     }
 
+    .badge-archive {
+      background: rgba(175, 82, 222, 0.15);
+      color: #af52de;
+      border: 1px solid rgba(175, 82, 222, 0.35);
+    }
+
     .price-tag {
       display: inline-block;
       padding: 4px 10px;
@@ -367,6 +426,9 @@
       color: var(--text-muted);
       margin-bottom: 5px;
       font-family: monospace;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-all;
     }
 
     .card-footer {
@@ -449,7 +511,7 @@
 
     .social-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
       gap: 20px;
       margin-top: 20px;
     }
@@ -461,9 +523,12 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: stretch;
       gap: 12px;
       text-decoration: none;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       border-width: 2px;
       border-style: solid;
@@ -471,6 +536,33 @@
 
     .social-card:hover {
       transform: translateY(-4px);
+    }
+
+    .social-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .social-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      min-width: 0;
+    }
+
+    .social-icon {
+      display: block;
+      width: 40px;
+      height: 40px;
+      padding: 4px;
+      border-radius: 10px;
+      object-fit: contain;
+      background: var(--icon-bg);
+      flex-shrink: 0;
     }
 
     .social-card.color-red {
@@ -506,12 +598,90 @@
     .social-title {
       font-size: 16px;
       font-weight: 800;
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      line-height: 1.3;
     }
 
     .social-link-text {
       font-size: 12px;
       color: var(--text-muted);
       word-break: break-all;
+      overflow-wrap: anywhere;
+      max-width: 100%;
+      line-height: 1.45;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .project-card {
+      background: var(--inner-box-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .project-card.red {
+      border-color: #ff3b30;
+      box-shadow: 0 4px 15px rgba(255, 59, 48, 0.15);
+    }
+
+    .project-card.blue {
+      border-color: #007aff;
+      box-shadow: 0 4px 15px rgba(0, 122, 255, 0.15);
+    }
+
+    .project-card.purple {
+      border-color: #af52de;
+      box-shadow: 0 4px 15px rgba(175, 82, 222, 0.15);
+    }
+
+    .project-title {
+      font-size: 18px;
+      font-weight: 800;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      line-height: 1.3;
+    }
+
+    .project-card.red .project-title { color: #ff3b30; }
+    .project-card.blue .project-title { color: #007aff; }
+    .project-card.purple .project-title { color: #af52de; }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      min-width: 0;
+      overflow-wrap: anywhere;
+      line-height: 1.45;
+    }
+
+    .project-link {
+      font-size: 12px;
+      color: var(--text-muted);
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      max-width: 100%;
     }
 
     .dev-grid {
@@ -628,6 +798,12 @@
       border: 1px solid rgba(142, 142, 147, 0.3);
     }
 
+    .prefix-green {
+      background: rgba(52, 199, 89, 0.2);
+      color: #34c759;
+      border: 1px solid rgba(52, 199, 89, 0.4);
+    }
+
     .settings-section {
       display: flex;
       flex-direction: column;
@@ -722,25 +898,55 @@
       display: none;
       flex-direction: column;
       gap: 8px;
+      max-width: calc(100vw - 40px);
+    }
+
+    #musicFloatingPlayer.minimized #youtubeIframeContainer {
+      display: none;
     }
 
     #musicFloatingPlayer iframe {
       width: 280px;
+      max-width: 100%;
       height: 157px;
       border-radius: 8px;
       border: none;
+      background: #000;
     }
 
     .player-controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
+      cursor: move;
+      user-select: none;
+    }
+
+    .player-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
     }
 
     .player-title {
       font-size: 11px;
       font-weight: 700;
       color: var(--text-muted);
+      overflow-wrap: anywhere;
+    }
+
+    .player-note {
+      display: none;
+      font-size: 11px;
+      line-height: 1.4;
+      color: var(--text-muted);
+      max-width: 280px;
+    }
+
+    .player-note a {
+      color: #4da6ff;
     }
 
     .player-close {
@@ -750,6 +956,13 @@
       cursor: pointer;
       font-weight: 700;
       font-size: 14px;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+
+    .player-close:hover {
+      background: var(--card-border);
     }
 
     .modal-overlay {
@@ -1003,7 +1216,217 @@
 
     .dev-profile-tg {
       font-size: 14px;
-      color: #4da6ff;
+      color: var(--text-muted);
+    }
+
+    .dev-modal-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .dev-modal-tabs button {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .dev-modal-tabs button:hover {
+      color: var(--text-main);
+    }
+
+    .dev-modal-tabs button.active {
+      color: var(--text-main);
+      border-bottom-color: #007aff;
+    }
+
+    .dev-tab-panel {
+      display: none;
+    }
+
+    .dev-tab-panel.active {
+      display: block;
+    }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(160px, 100%), 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .interest-card {
+      background: var(--inner-box-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 12px;
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .interest-card.green {
+      border-color: #34c759;
+      color: #34c759;
+      background: rgba(52, 199, 89, 0.08);
+    }
+
+    .interest-card.yellow {
+      border-color: #ffd60a;
+      color: #ffd60a;
+      background: rgba(255, 214, 10, 0.08);
+    }
+
+    .interest-card.blue {
+      border-color: #007aff;
+      color: #007aff;
+      background: rgba(0, 122, 255, 0.08);
+    }
+
+    .interest-card.red {
+      border-color: #ff3b30;
+      color: #ff3b30;
+      background: rgba(255, 59, 48, 0.08);
+    }
+
+    .interest-card.black {
+      border-color: #3a3a3c;
+      color: var(--text-main);
+      background: rgba(142, 142, 158, 0.12);
+    }
+
+    .interests-empty {
+      grid-column: 1 / -1;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .archive-page {
+      background: #000;
+      border: 1px solid rgba(0, 255, 65, 0.3);
+      border-radius: 12px;
+      padding: 24px;
+      color: #33ff66;
+      line-height: 1.6;
+    }
+
+    .archive-page h2 {
+      color: #33ff66;
+      margin-bottom: 16px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      letter-spacing: 2px;
+      font-size: 20px;
+    }
+
+    .archive-page p {
+      color: #22dd55;
+    }
+
+    .archive-page a {
+      color: #7CFC00;
+    }
+
+    .archive-terminal {
+      position: relative;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(0, 255, 65, 0.35);
+      border-radius: 10px;
+      padding: 20px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.65;
+      color: #33ff66;
+      box-shadow: 0 0 30px rgba(0, 255, 65, 0.12), inset 0 0 90px rgba(0, 255, 65, 0.04);
+      overflow-wrap: anywhere;
+    }
+
+    .archive-terminal::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(to bottom, rgba(0, 255, 65, 0.035) 0 1px, transparent 1px 3px);
+    }
+
+    .terminal-line {
+      white-space: pre-wrap;
+    }
+
+    .terminal-dim { color: #1f9e4d; }
+    .terminal-echo { color: #7CFC00; }
+    .terminal-error { color: #ff5555; }
+    .terminal-warn { color: #ffd60a; }
+
+    .terminal-prompt-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .terminal-prompt {
+      color: #7CFC00;
+      flex-shrink: 0;
+    }
+
+    .terminal-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+      color: #33ff66;
+      font: inherit;
+      outline: none;
+      caret-color: #33ff66;
+      flex: 1 1 160px;
+      min-width: 0;
+      max-width: 100%;
+      padding: 2px 4px;
+    }
+
+    .terminal-cursor {
+      color: #33ff66;
+      animation: terminalBlink 1s steps(1) infinite;
+    }
+
+    @keyframes terminalBlink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .archive-doc {
+      margin-top: 18px;
+    }
+
+    .archive-doc .archive-heading {
+      color: #7CFC00;
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 16px;
+    }
+
+    .archive-doc .archive-subheading {
+      color: #33ff66;
+      font-weight: 700;
+      margin: 20px 0 8px;
+      font-size: 15px;
+    }
+
+    .archive-doc p {
+      color: #22dd55;
+      margin-bottom: 8px;
+      font-size: 14px;
     }
 
     .gifts-grid {
@@ -1126,11 +1549,15 @@
   </div>
 
   <div id="musicFloatingPlayer">
-    <div class="player-controls">
+    <div class="player-controls" id="playerDragHandle">
       <span class="player-title" id="playerTitleText">🎵 Медиаплеер</span>
-      <button class="player-close" id="closeFloatingPlayerBtn">&times;</button>
+      <div class="player-btn-group">
+        <button class="player-close" id="minimizePlayerBtn" title="Свернуть">—</button>
+        <button class="player-close" id="closeFloatingPlayerBtn" title="Закрыть">&times;</button>
+      </div>
     </div>
     <div id="youtubeIframeContainer"></div>
+    <div id="playerNote" class="player-note"></div>
   </div>
 
   <header>
@@ -1140,6 +1567,7 @@
     </div>
 
     <div class="header-actions">
+      <button class="btn-upload" id="openMediaBtn" title="Открыть медиаплеер">🎵 Медиа</button>
       <div class="file-input-wrapper">
         <button class="btn-upload">
           📄 Загрузить main.txt
@@ -1158,6 +1586,7 @@
       <li class="nav-tab" data-tab="books">Книги</li>
       <li class="nav-tab" data-tab="mods">Моды</li>
       <li class="nav-tab" data-tab="assets">Ассеты</li>
+      <li class="nav-tab" data-tab="archives">Архивы</li>
       <li class="nav-tab" data-tab="socials">Соцсети</li>
       <li class="nav-tab" data-tab="about">О нас</li>
       <li class="nav-tab" data-tab="developers">Разработчики</li>
@@ -1168,6 +1597,17 @@
   <div class="controls-bar" id="controlsBar">
     <div class="search-box">
       <input type="text" id="searchInput" placeholder="Поиск по названию или ID...">
+    </div>
+    <div class="filter-chips" id="filterChips">
+      <button type="button" class="filter-chip active" data-filter="all">All</button>
+      <span class="filter-group-label">Приписки:</span>
+      <button type="button" class="filter-chip" data-filter="dev">В разработке</button>
+      <button type="button" class="filter-chip" data-filter="ready">Доступно</button>
+      <button type="button" class="filter-chip" data-filter="hidden">Скрыто</button>
+      <button type="button" class="filter-chip" data-filter="ai">AI</button>
+      <span class="filter-group-label">Разработчик:</span>
+      <button type="button" class="filter-chip" data-filter="error669966">Error669966</button>
+      <button type="button" class="filter-chip" data-filter="holyslav">HolySlav</button>
     </div>
   </div>
 
@@ -1229,8 +1669,20 @@
         </div>
       </div>
 
-      <div class="gallery-title">Подарки:</div>
-      <div class="gifts-grid" id="devModalGifts"></div>
+      <div class="dev-modal-tabs" id="devModalTabs">
+        <button type="button" class="active" data-tab="gifts">Подарки</button>
+        <button type="button" data-tab="interests">Личные интересы</button>
+      </div>
+
+      <div class="dev-tab-panel active" id="devModalGiftsPanel">
+        <div class="gallery-title">Подарки:</div>
+        <div class="gifts-grid" id="devModalGifts"></div>
+      </div>
+
+      <div class="dev-tab-panel" id="devModalInterestsPanel">
+        <div class="gallery-title">Личные интересы:</div>
+        <div class="interests-grid" id="devModalInterests"></div>
+      </div>
     </div>
   </div>
 
@@ -1243,6 +1695,7 @@
         <input type="text" id="youtubeUrlInput" placeholder="https://youtube.com/... или https://twitch.tv/...">
         <button id="applyMusicBtn">Запустить</button>
       </div>
+      <div class="setting-desc" style="margin-top: 12px;">Поддерживаются ссылки вида: youtube.com/watch?v=..., youtu.be/..., youtube.com/shorts/..., twitch.tv/название_канала</div>
     </div>
   </div>
 
@@ -1345,139 +1798,258 @@
         id: 'error669966',
         name: 'Error669966',
         avatar: 'https://i.ibb.co/fzhqypKt/photo-2026-03-10-10-08-52.jpg',
-        tg: 'https://t.me/Super_Minepro',
         tags: [
           { text: 'OWNER', class: 'prefix-red' },
           { text: 'ERROR', class: 'prefix-blue-red' },
           { text: 'CODER', class: 'prefix-purple' }
         ],
+        interests: ['Undertale', 'Deltarune', 'Half Life'],
         giftsAll: true
       },
       {
         id: 'holyslav',
         name: 'HolySlav',
         avatar: 'https://i.ibb.co/mFBvSKxC/svit.jpg',
-        tg: 'https://t.me/SvitHolySlav',
         tags: [
           { text: 'GL. ADMIN', class: 'prefix-red' },
           { text: 'DEV', class: 'prefix-maroon' }
-        ]
+        ],
+        interests: ['Half Life']
       },
       {
         id: 'whsss1233',
         name: 'Whsss1233',
         avatar: 'https://i.ibb.co/d4fgJKWv/image.jpg',
-        tg: '(скрыто)',
         tags: [
           { text: 'BOOSTER', class: 'prefix-pink' },
           { text: 'HELPER', class: 'prefix-yellow' },
-          { text: 'TESTER', class: 'prefix-gray' }
-        ]
+          { text: 'TESTER', class: 'prefix-gray' },
+          { text: 'Бывший сотрудник', class: 'prefix-green' }
+        ],
+        interests: ['Undertale']
       },
       {
         id: 'marat',
         name: 'Marat CountryBalls',
         avatar: 'https://i.ibb.co/qPtkw5S/Marat.jpg',
-        tg: 'https://t.me/Just_Marat02',
         tags: [
           { text: 'HELPER', class: 'prefix-yellow' },
           { text: 'Z. OWNER', class: 'prefix-red' },
-          { text: 'OLD', class: 'prefix-white' }
-        ]
+          { text: 'OLD', class: 'prefix-white' },
+          { text: 'Бывший сотрудник', class: 'prefix-green' }
+        ],
+        interests: ['Minecraft']
       },
       {
         id: 'lirik',
         name: 'The LIRIK',
         avatar: 'https://i.ibb.co/JRqRjbGk/okak.jpg',
-        tg: 'https://t.me/Kiruha_1',
         tags: [
           { text: 'USER', class: 'prefix-gray' },
           { text: 'OLD', class: 'prefix-white' }
-        ]
+        ],
+        interests: ['Undertale', 'Deltarune']
       },
       {
         id: 'sanhds',
         name: 'Sanhds',
         avatar: 'https://i.ibb.co/jvNp06WR/Sanhds.jpg',
-        tg: '(скрыто)',
         tags: [
           { text: 'HELPER', class: 'prefix-yellow' },
           { text: 'OLD', class: 'prefix-white' }
-        ]
+        ],
+        interests: ['Plants vs Zombies']
       },
       {
         id: 'v2',
         name: 'V2',
         avatar: 'https://i.ibb.co/r2s3TmTR/V2.jpg',
-        tg: 'https://t.me/DeltarynCehodni',
         tags: [
           { text: 'DESIGN', class: 'prefix-cyan' },
-          { text: 'HELPER', class: 'prefix-yellow' }
-        ]
+          { text: 'HELPER', class: 'prefix-yellow' },
+          { text: 'Пиарщик', class: 'prefix-white' }
+        ],
+        interests: ['Undertale']
       },
       {
         id: 'icebox',
         name: 'ICE BOX',
         avatar: 'https://i.ibb.co/mVCgBjMr/ICE-BOX.jpg',
-        tg: 'https://t.me/ICE_BOX4444',
         tags: [
           { text: 'HELPER', class: 'prefix-yellow' }
-        ]
+        ],
+        interests: ['Half Life']
       },
       {
         id: 'pamchill',
         name: 'Pamchill',
         avatar: 'https://i.ibb.co/JDTHhjb/photo-2026-10-12-11-22-51.jpg',
-        tg: '(скрыто)',
         tags: [
           { text: 'Z. OWNER', class: 'prefix-red' },
           { text: 'TESTER', class: 'prefix-gray' },
           { text: 'BOOSTER', class: 'prefix-pink' }
-        ]
+        ],
+        interests: ['Deltarune', 'Undertale', 'Minecraft']
       }
     ];
 
+    const INTEREST_GAMES = {
+      'Minecraft': 'green',
+      'Enter the Gungeon': 'yellow',
+      'Half Life': 'blue',
+      'Undertale': 'red',
+      'Deltarune': 'red',
+      'Shadow Fight': 'black',
+      'Plants vs Zombies': 'green'
+    };
+
+    const mainProjects = [
+      {
+        id: 'crashverse',
+        title: 'Crashverse',
+        desc: 'Фанатское продолжение Андерверса.',
+        color: 'red',
+        type: 'link',
+        url: 'https://t.me/crashverse_battles'
+      },
+      {
+        id: 'crashversegame20',
+        title: 'CRASHVERSE GAME 2.0',
+        desc: 'Продолжение Crashverse — новая история и новые приключения.',
+        color: 'blue',
+        type: 'app',
+        appId: 'crashversegame20'
+      }
+    ];
+
+    const ARCHIVE_ACCESS = {
+      login: 'Error',
+      password: '669966'
+    };
+
+    const ARCHIVE_DOCUMENT = [
+      { type: 'heading', text: '(З) Архив BigGames' },
+
+      { type: 'subheading', text: '(П) Глава - 2017-2023 год' },
+      { type: 'p', text: 'Я начинал все с того... что начал часто играть в Slime Rancher у меня появилось желание делать на него моды...' },
+      { type: 'p', text: 'Но это было лишь началом которое шло 6 лет' },
+      { type: 'p', text: 'У меня еще не было большой мотивации что либо делать...' },
+
+      { type: 'subheading', text: '(П) Глава I 2023-2024 год' },
+      { type: 'p', text: 'Я был в фандоме андертейла все начилось с просмотра летсплея Куплинова по андертейлу' },
+      { type: 'p', text: 'Я не думал что все зайдет так далеко' },
+      { type: 'p', text: 'Сначала я думал что это все все персонажи андертейла это точка' },
+      { type: 'p', text: 'Но потом я узнал о Undertale AU' },
+      { type: 'p', text: 'Это было большим открытием для меня...' },
+      { type: 'p', text: 'Сначала я изучал самые стандартные ау по типу: Underfell, Underswap, Horrortale и так далее' },
+      { type: 'p', text: 'Но с каждым днем я находил все больше AU пока не наткнулся на... Underverse история где ау пересекаются' },
+      { type: 'p', text: 'Это было реально интересно' },
+      { type: 'p', text: 'Когда я увидел Андерверс я считал его произведением исскуства' },
+      { type: 'p', text: 'Но сейчас я понял какая это помойка.' },
+      { type: 'p', text: 'Тогда у меня уже была критика к андерверсу и я принял решение создать продолжение - андерверса - крашверс' },
+      { type: 'p', text: 'Мои первые эпизоды были.. простенькими я их держал в уме до 2025 года но о нем позже' },
+
+      { type: 'subheading', text: '(П) Глава II 2025 год' },
+      { type: 'p', text: 'Это самый лучший год в истории BigGames' },
+      { type: 'p', text: 'Все началось с того что я ненадолго ушел от Undertale' },
+      { type: 'p', text: 'И перешел к майнкрафт серверам я вдохновлялся проектами: ReallyWorld, FunTime, HolyWorld и пытался сделать свой сервер' },
+      { type: 'p', text: 'Когда я нашел себе первого тех. админа он был странным' },
+      { type: 'p', text: 'В один день я увидел это мой сервер был полностью удален вместе с резерв. копиями' },
+      { type: 'p', text: 'А тех админ пишет что я ему не нужен и сделал свою работу' },
+      { type: 'p', text: 'История переписки... очищена' },
+      { type: 'p', text: 'Второй тех админ он был более мотивированным и казался нормальным' },
+      { type: 'p', text: 'Но потом он полностью забил на все он просто игнорил меня' },
+      { type: 'p', text: 'Я его заблокал и в этом году я встретился с ним в одном чате он.. сильно изменился' },
+      { type: 'p', text: 'Он меня сразу же закинул оскорблениями' },
+      { type: 'p', text: 'После этого я ушел из майнкрафт серверов и вернулся к андертейлу я встретил один канал по своей ау' },
+      { type: 'p', text: 'И я решил написать его владельцу мы договорились что он отвечает за сюжет а я за саму игру' },
+      { type: 'p', text: 'Когда вышла первая версия все были в восторге но потом мне надоело делать игру и канал был заброшен' },
+      { type: 'p', text: 'Но потом влд официально заявляет что канал отменен как и игра...' },
+      { type: 'p', text: 'Потом я вернулся в майнкрафт и лучше бы я этого не делал' },
+      { type: 'p', text: 'Я нашел один сервер с кучкой ошибок я решил написать влд стать тех админом' },
+      { type: 'p', text: 'Он был весьма токсичен но смогли договориться' },
+      { type: 'p', text: 'Я зарабатывал буквально 15р в месяц, но для меня было это как развлечение' },
+      { type: 'p', text: 'Потом я встретил одного из игроков моего сервера он оказывается тоже узнал о сервере где я тех админ' },
+      { type: 'p', text: 'Странно ведь о нем знали всего 20 человек' },
+      { type: 'p', text: 'Он купил владельца' },
+      { type: 'p', text: 'Позже я проверил чат той самой ау по андертейл где я должен делать игру' },
+      { type: 'p', text: 'И там был влд сервера где я был тех админом' },
+      { type: 'p', text: 'Я начал писать всем кому мог в поиках инфы и я доверил это тому самому игроку' },
+      { type: 'p', text: 'И сказал не отправляй влд' },
+      { type: 'p', text: 'И он решил меня предать' },
+      { type: 'p', text: 'Мне влд угрожал' },
+      { type: 'p', text: 'После решения конфликта у меня уже было третье предательство...' },
+      { type: 'p', text: 'И как я уже говорил у меня был дедлайн' },
+
+      { type: 'subheading', text: 'Глава III - 2026 год' },
+      { type: 'p', text: 'Я создал канал где опубликовывал эпизоды крашверса' },
+      { type: 'link', text: 'https://t.me/crashverse_battles' },
+      { type: 'p', text: 'Но те люди которые были в том проекте уже не хотели возвращаться в крашверс и мне пришлось набирать новых людей' },
+      { type: 'p', text: 'У меня неожиданно появлялись идеи для приложений' },
+      { type: 'p', text: 'И я создал мелкую студию под названием BigGames' },
+      { type: 'p', text: 'Но кроме неудач я ничего не получил...' },
+
+      { type: 'subheading', text: 'Глава IV - Что сейчас?' },
+      { type: 'p', text: 'Я уже знаю более 200 ау по андертейлу' },
+      { type: 'p', text: 'Я получил много мотивации' },
+      { type: 'p', text: 'И я готов продолжать развивать BigGames' },
+      { type: 'p', text: 'Но есть шанс что все закроется и BigGames будет закрыт.' }
+    ];
+
+    const SOCIAL_ICONS = {
+      vk: 'https://i.ibb.co/jv7HSkV3/vk.jpg',
+      whatsapp: 'https://i.ibb.co/ccWqCgYd/whatsapp-icon.jpg',
+      telegram: 'https://i.ibb.co/vxWxKgyr/telegram.jpg',
+      discord: 'https://i.ibb.co/tM62hKXG/discord.jpg',
+      twitch: 'https://i.ibb.co/3YVRG0cf/twitch.jpg',
+      twitter: 'https://i.ibb.co/cSd3bvGS/twitter.jpg',
+      x: 'https://i.ibb.co/DDZ3K9Ld/x-dark.jpg',
+      youtube: 'https://i.ibb.co/whTwYq2b/youtube.jpg',
+      skype: 'https://i.ibb.co/TDLd5KnX/skype.jpg',
+      tiktok: 'https://i.ibb.co/cSSJ80mt/tiktok-icon-dark.jpg'
+    };
+
     let socialsList = [
-      { name: 'ErrorMessageChannel', color: 'red', url: 'https://t.me/biggamesstudiochannel' },
-      { name: 'ErrorMessageChannel #2', color: 'red', url: 'https://t.me/biggamesstudio' },
-      { name: 'ErrorMessageChannel #3', color: 'red', url: 'https://t.me/biggamesstudio' },
-      { name: 'ErrorMessageChat', color: 'red', url: 'https://t.me/biggamesstudio' },
-      { name: 'ErrorMessageServer', color: 'red', url: 'https://discord.gg/YsTqDSpDg' },
+      { name: 'ErrorMessageChannel', color: 'red', url: 'https://t.me/biggamesstudiochannel', icons: ['telegram'] },
+      { name: 'ErrorMessageChannel #2', color: 'red', url: 'https://t.me/biggamesstudio', icons: ['telegram'] },
+      { name: 'ErrorMessageChannel #3', color: 'red', url: 'https://t.me/biggamesstudio', icons: ['telegram'] },
+      { name: 'ErrorMessageChat', color: 'red', url: 'https://t.me/biggamesstudio', icons: ['telegram'] },
+      { name: 'ErrorMessageServer', color: 'red', url: 'https://discord.gg/YsTqDSpDg', icons: ['discord'] },
       { name: 'CorvoxChannel', color: 'red', url: 'https://corvox-chat.com/biggameschannel' },
       { name: 'CorvoxChat', color: 'red', url: 'https://corvox-chat.com/biggameschat' },
       { name: 'CorvoxServer', color: 'red', url: 'https://corvox-chat.com/1ff2289c40b070982afa146f' },
-      { name: 'YouTube', color: 'red', url: 'https://youtube.com/@biggames-d4b?si=kiEXdKUR1pQnVaF5' },
+      { name: 'YouTube', color: 'red', url: 'https://youtube.com/@biggames-d4b?si=kiEXdKUR1pQnVaF5', icons: ['youtube'] },
       { name: 'OK', color: 'red', url: '#' },
 
-      { name: 'TelegramChannel', color: 'blue', url: 'https://t.me/biggamesstudiochannel' },
-      { name: 'TelegramChat', color: 'blue', url: 'https://t.me/biggamesstudio' },
-      { name: 'TelegramChannel #2', color: 'blue', url: 'https://t.me/portal_three' },
-      { name: 'TelegramChannel #3', color: 'blue', url: 'https://t.me/crashverse_battles' },
+      { name: 'TelegramChannel', color: 'blue', url: 'https://t.me/biggamesstudiochannel', icons: ['telegram'] },
+      { name: 'TelegramChat', color: 'blue', url: 'https://t.me/biggamesstudio', icons: ['telegram'] },
+      { name: 'TelegramChannel #2', color: 'blue', url: 'https://t.me/portal_three', icons: ['telegram'] },
+      { name: 'TelegramChannel #3', color: 'blue', url: 'https://t.me/crashverse_battles', icons: ['telegram'] },
       { name: 'Bilibili', color: 'blue', url: '#' },
-      { name: 'Skype', color: 'blue', url: '#' },
-      { name: 'VK', color: 'blue', url: '#' },
-      { name: 'TelegramSupport', color: 'blue', url: 'https://t.me/biggamesstudio_bot' },
+      { name: 'Skype', color: 'blue', url: '#', icons: ['skype'] },
+      { name: 'VK', color: 'blue', url: '#', icons: ['vk'] },
+      { name: 'TelegramSupport', color: 'blue', url: 'https://t.me/biggamesstudio_bot', icons: ['telegram'] },
 
       { name: 'SeferStudio', color: 'gray', url: 'https://sefer-studio.ru/profile?username=Error669966' },
-      { name: 'TikTok', color: 'gray', url: '#' },
+      { name: 'TikTok', color: 'gray', url: '#', icons: ['tiktok'] },
       { name: 'TikTok Lite', color: 'gray', url: '#' },
       { name: 'Likee', color: 'gray', url: '#' },
-      { name: 'Twitter', color: 'gray', url: '#' },
+      { name: 'Twitter', color: 'gray', url: '#', icons: ['twitter', 'x'] },
       { name: 'RuTube', color: 'gray', url: '#' },
 
-      { name: 'WhatsApp', color: 'green', url: '#' },
+      { name: 'WhatsApp', color: 'green', url: '#', icons: ['whatsapp'] },
 
       { name: 'Viber', color: 'purple', url: '#' },
-      { name: 'Twitch', color: 'purple', url: 'https://www.twitch.tv/errorgamesstudio' },
+      { name: 'Twitch', color: 'purple', url: 'https://www.twitch.tv/errorgamesstudio', icons: ['twitch'] },
       { name: 'MAX', color: 'purple', url: '#' },
       { name: 'Instagram', color: 'purple', url: '#' },
 
-      { name: 'Discord', color: 'green', url: 'https://discord.gg/YsTqDSpDg' },
-      { name: 'Студия OpenPage', color: 'green', url: 'https://t.me/biggamesstudio' },
-      { name: 'Телеграм канал студии', color: 'green', url: 'https://t.me/biggamesstudiochannel' },
-      { name: 'Телеграм поддержка', color: 'green', url: 'https://t.me/biggamesstudio_bot' },
-      { name: 'Личный Telegram ЛС', color: 'green', url: 'https://t.me/Super_Minepro' },
-      { name: 'Личный YouTube канал', color: 'green', url: 'https://youtube.com/@dungeosminecrafter?si=3MEtY66nwhsDlsHL' },
+      { name: 'Discord', color: 'green', url: 'https://discord.gg/YsTqDSpDg', icons: ['discord'] },
+      { name: 'Студия OpenPage', color: 'green', url: 'https://t.me/biggamesstudio', icons: ['telegram'] },
+      { name: 'Телеграм канал студии', color: 'green', url: 'https://t.me/biggamesstudiochannel', icons: ['telegram'] },
+      { name: 'Телеграм поддержка', color: 'green', url: 'https://t.me/biggamesstudio_bot', icons: ['telegram'] },
+      { name: 'Личный Telegram ЛС', color: 'green', url: 'https://t.me/Super_Minepro', icons: ['telegram'] },
+      { name: 'Личный YouTube канал', color: 'green', url: 'https://youtube.com/@dungeosminecrafter?si=3MEtY66nwhsDlsHL', icons: ['youtube'] },
       { name: 'Corvox Сервер (Резерв)', color: 'green', url: 'https://corvox-chat.com/BigGames%20Server' }
     ];
 
@@ -1645,7 +2217,8 @@
       ],
       assets: [
         { name: 'CountryBallsTaleAssets', id: 'countryballstaleassets' }
-      ]
+      ],
+      archives: []
     };
 
     let projectParamsData = {
@@ -1789,11 +2362,13 @@
     let pricesData = {};
     let aboutData = { texts: [], links: [] };
     let currentTab = 'home';
+    let currentFilter = 'all';
     let currentLogoType = 'biggames';
 
     let currentTheme = 'dark';
     let isSansVisible = false;
     let isMusicPlaying = false;
+    let lastMediaUrl = '';
 
     const gridContainer = document.getElementById('gridContainer');
     const staticPageContainer = document.getElementById('staticPageContainer');
@@ -1815,6 +2390,7 @@
     const devModalTags = document.getElementById('devModalTags');
     const devModalTg = document.getElementById('devModalTg');
     const devModalGifts = document.getElementById('devModalGifts');
+    const devModalInterests = document.getElementById('devModalInterests');
     const sansOverlay = document.getElementById('sansOverlay');
 
     const musicModalOverlay = document.getElementById('musicModalOverlay');
@@ -1825,6 +2401,41 @@
     const youtubeIframeContainer = document.getElementById('youtubeIframeContainer');
     const closeFloatingPlayerBtn = document.getElementById('closeFloatingPlayerBtn');
     const playerTitleText = document.getElementById('playerTitleText');
+
+    const SOCIAL_ICON_LABELS = {
+      vk: 'VK',
+      whatsapp: 'WhatsApp',
+      telegram: 'Telegram',
+      discord: 'Discord',
+      twitch: 'Twitch',
+      twitter: 'Twitter',
+      x: 'X',
+      youtube: 'YouTube',
+      skype: 'Skype',
+      tiktok: 'TikTok'
+    };
+
+    function escapeHtml(str) {
+      return String(str == null ? '' : str).replace(/[&<>"']/g, ch => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      })[ch]);
+    }
+
+    function getSocialIconSrc(iconKey) {
+      return SOCIAL_ICONS[iconKey] || '';
+    }
+
+    function renderSocialIcons(icons, altText) {
+      if (!icons || !icons.length) return '';
+      const imgs = icons.map(key => `
+        <img class="social-icon" src="${getSocialIconSrc(key)}" data-icon-key="${key}" alt="Логотип ${SOCIAL_ICON_LABELS[key] || key}" loading="lazy">
+      `).join('');
+      return `<div class="social-icons">${imgs}</div>`;
+    }
 
     function init() {
       setupEvents();
@@ -1849,6 +2460,16 @@
 
       searchInput.addEventListener('input', () => renderTab(currentTab));
 
+      document.getElementById('filterChips').addEventListener('click', (e) => {
+        const chip = e.target.closest('.filter-chip');
+        if (!chip) return;
+        currentFilter = chip.dataset.filter;
+        document.querySelectorAll('#filterChips .filter-chip').forEach(c => {
+          c.classList.toggle('active', c.dataset.filter === currentFilter);
+        });
+        renderTab(currentTab);
+      });
+
       document.getElementById('txtFileInput').addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -1868,25 +2489,43 @@
       devModalOverlay.addEventListener('click', (e) => {
         if (e.target === devModalOverlay) closeDevModal();
       });
+      document.getElementById('devModalTabs').addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-tab]');
+        if (!btn) return;
+        switchDevModalTab(btn.dataset.tab);
+      });
       musicModalOverlay.addEventListener('click', (e) => {
         if (e.target === musicModalOverlay) musicModalOverlay.classList.remove('active');
       });
 
       closeFloatingPlayerBtn.addEventListener('click', stopMusic);
 
+      document.getElementById('openMediaBtn').addEventListener('click', openMediaModal);
+
+      document.getElementById('minimizePlayerBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const minimized = musicFloatingPlayer.classList.toggle('minimized');
+        e.currentTarget.textContent = minimized ? '▢' : '—';
+        e.currentTarget.title = minimized ? 'Развернуть' : 'Свернуть';
+      });
+
+      initPlayerDrag();
+
       applyMusicBtn.addEventListener('click', () => {
         const url = youtubeUrlInput.value.trim();
-        const ytId = extractYouTubeId(url);
-        const twitchChannel = extractTwitchChannel(url);
 
-        if (ytId) {
-          playYouTube(ytId);
-          musicModalOverlay.classList.remove('active');
-        } else if (twitchChannel) {
-          playTwitch(twitchChannel);
-          musicModalOverlay.classList.remove('active');
-        } else {
-          alert('Некорректная ссылка на YouTube или Twitch');
+        if (!playMediaUrl(url)) {
+          alert(url ? 'Некорректная ссылка на YouTube или Twitch' : 'Вставьте ссылку на YouTube или Twitch');
+          return;
+        }
+
+        musicModalOverlay.classList.remove('active');
+      });
+
+      youtubeUrlInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          applyMusicBtn.click();
         }
       });
     }
@@ -1894,25 +2533,123 @@
     function playYouTube(videoId) {
       isMusicPlaying = true;
       playerTitleText.innerText = '🎵 Фоновая музыка (YouTube)';
-      youtubeIframeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-      musicFloatingPlayer.style.display = 'flex';
+      setPlayerNote('');
+
+      const params = new URLSearchParams({
+        autoplay: '1',
+        rel: '0',
+        playsinline: '1',
+        loop: '1',
+        playlist: videoId,
+        iv_load_policy: '3'
+      });
+      const origin = window.location.origin;
+      if (origin && origin !== 'null') params.set('origin', origin);
+
+      youtubeIframeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?${params.toString()}" title="YouTube плеер" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>`;
+      showFloatingPlayer();
       updateMusicButtonState();
     }
 
     function playTwitch(channel) {
       isMusicPlaying = true;
       playerTitleText.innerText = `🔴 Стрим Twitch: ${channel}`;
+
       const parentDomain = window.location.hostname || 'localhost';
-      youtubeIframeContainer.innerHTML = `<iframe src="https://player.twitch.tv/?channel=${channel}&parent=${parentDomain}&autoplay=true" allowfullscreen></iframe>`;
-      musicFloatingPlayer.style.display = 'flex';
+      const params = new URLSearchParams({
+        channel: channel,
+        parent: parentDomain,
+        autoplay: 'true',
+        muted: 'true'
+      });
+
+      youtubeIframeContainer.innerHTML = `<iframe src="https://player.twitch.tv/?${params.toString()}" title="Twitch плеер" allow="autoplay; fullscreen"></iframe>`;
+      showFloatingPlayer();
       updateMusicButtonState();
+
+      if (window.location.protocol === 'file:') {
+        setPlayerNote(`Twitch не разрешает встраивание при открытии файла напрямую (file://). <a href="https://www.twitch.tv/${channel}" target="_blank" rel="noopener">Открыть канал в новой вкладке</a>`);
+      }
+    }
+
+    function playMediaUrl(url) {
+      const clean = (url || '').trim();
+      if (!clean) return false;
+
+      const ytId = extractYouTubeId(clean);
+      const twitchChannel = extractTwitchChannel(clean);
+
+      if (ytId) {
+        lastMediaUrl = clean;
+        playYouTube(ytId);
+        return true;
+      }
+
+      if (twitchChannel) {
+        lastMediaUrl = clean;
+        playTwitch(twitchChannel);
+        return true;
+      }
+
+      return false;
+    }
+
+    function setPlayerNote(html) {
+      const note = document.getElementById('playerNote');
+      if (!note) return;
+      note.innerHTML = html;
+      note.style.display = html ? 'block' : 'none';
+    }
+
+    function showFloatingPlayer() {
+      musicFloatingPlayer.style.display = 'flex';
     }
 
     function stopMusic() {
       isMusicPlaying = false;
       youtubeIframeContainer.innerHTML = '';
       musicFloatingPlayer.style.display = 'none';
+      setPlayerNote('');
       updateMusicButtonState();
+    }
+
+    function openMediaModal() {
+      youtubeUrlInput.value = lastMediaUrl;
+      musicModalOverlay.classList.add('active');
+    }
+
+    function initPlayerDrag() {
+      const handle = document.getElementById('playerDragHandle');
+      if (!handle) return;
+
+      let isDragging = false;
+      let offsetX = 0;
+      let offsetY = 0;
+
+      handle.addEventListener('mousedown', (e) => {
+        if (e.target.closest('button')) return;
+        const rect = musicFloatingPlayer.getBoundingClientRect();
+        isDragging = true;
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        musicFloatingPlayer.style.left = rect.left + 'px';
+        musicFloatingPlayer.style.top = rect.top + 'px';
+        musicFloatingPlayer.style.right = 'auto';
+        musicFloatingPlayer.style.bottom = 'auto';
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const maxX = Math.max(0, window.innerWidth - musicFloatingPlayer.offsetWidth);
+        const maxY = Math.max(0, window.innerHeight - musicFloatingPlayer.offsetHeight);
+        const x = Math.min(maxX, Math.max(0, e.clientX - offsetX));
+        const y = Math.min(maxY, Math.max(0, e.clientY - offsetY));
+        musicFloatingPlayer.style.left = x + 'px';
+        musicFloatingPlayer.style.top = y + 'px';
+      });
+
+      document.addEventListener('mouseup', () => { isDragging = false; });
     }
 
     function updateMusicButtonState() {
@@ -1956,17 +2693,9 @@
       });
       document.getElementById('paramPlatform').innerHTML = platformHtml || '-';
 
-      let authorName = 'Error669966';
-      let authorId = 'error669966';
-      const lowerName = item.name.toLowerCase();
-      const lowerId = item.id.toLowerCase();
-      
-      if (lowerName.includes('errormessage') || lowerId.includes('errormessage') || 
-          lowerName.includes('spriteanimator') || lowerId.includes('spriteanimator') || 
-          lowerName.includes('ai studio') || lowerId.includes('aistudio')) {
-        authorName = 'HolySlav';
-        authorId = 'holyslav';
-      }
+      const author = getItemAuthor(item);
+      const authorId = author.id;
+      const authorName = author.name;
 
       const authorObj = developersList.find(d => d.id === authorId);
       if (authorObj) {
@@ -2036,6 +2765,44 @@
       if (lower.includes('premium')) return 'premium';
       if (lower.includes('stars') || lower.includes('star')) return 'stars';
       return 'free';
+    }
+
+    function getItemAuthor(item) {
+      const lowerName = (item.name || '').toLowerCase();
+      const lowerId = (item.id || '').toLowerCase();
+
+      if (lowerName.includes('errormessage') || lowerId.includes('errormessage') ||
+          lowerName.includes('spriteanimator') || lowerId.includes('spriteanimator') ||
+          lowerName.includes('ai studio') || lowerId.includes('aistudio')) {
+        return { name: 'HolySlav', id: 'holyslav' };
+      }
+
+      return { name: 'Error669966', id: 'error669966' };
+    }
+
+    function isAiProject(item) {
+      const params = projectParamsData[item.id];
+      if (params && /ai/i.test(params.engine)) return true;
+      if (/(^|\s)ai(\s|$)/i.test(item.name || '')) return true;
+      return /aistudio|aienglish|baseaistudio/i.test(item.id || '');
+    }
+
+    function matchesFilter(item, filter) {
+      switch (filter) {
+        case 'dev':
+          return !readyProjects.has(item.id) && !hiddenProjects.has(item.id);
+        case 'ready':
+          return readyProjects.has(item.id);
+        case 'hidden':
+          return hiddenProjects.has(item.id);
+        case 'ai':
+          return isAiProject(item);
+        case 'error669966':
+        case 'holyslav':
+          return getItemAuthor(item).id === filter;
+        default:
+          return true;
+      }
     }
 
     function formatOpenPageText(str) {
@@ -2119,7 +2886,7 @@
       currentTab = tab;
       const searchQuery = searchInput.value.toLowerCase().trim();
 
-      if (['about', 'developers', 'settings', 'socials', 'home'].includes(tab)) {
+      if (['about', 'developers', 'settings', 'socials', 'home', 'archives'].includes(tab)) {
         gridContainer.style.display = 'none';
         controlsBar.style.display = 'none';
         staticPageContainer.style.display = 'block';
@@ -2134,13 +2901,18 @@
       gridContainer.innerHTML = '';
       const items = database[tab] || [];
 
-      const filtered = items.filter(item => 
-        item.name.toLowerCase().includes(searchQuery) || 
-        item.id.toLowerCase().includes(searchQuery)
+      const filtered = items.filter(item =>
+        (item.name.toLowerCase().includes(searchQuery) ||
+         item.id.toLowerCase().includes(searchQuery)) &&
+        matchesFilter(item, currentFilter)
       );
 
       if (filtered.length === 0) {
-        gridContainer.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;">Ничего не найдено</div>`;
+        const isEmptyArchive = (tab === 'archives' && currentFilter === 'all' && !searchQuery);
+        const emptyText = isEmptyArchive
+          ? 'В архиве пока нет проектов — сюда можно переносить старые версии.'
+          : 'Ничего не найдено';
+        gridContainer.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;">${emptyText}</div>`;
         return;
       }
 
@@ -2152,6 +2924,7 @@
 
         const tagClass = `tag-${priceCat}`;
         const showAiBadge = (tab === 'apps' || tab === 'programs');
+        const isArchive = tab === 'archives';
 
         let statusBadgeHtml = '';
         if (isReady) {
@@ -2161,6 +2934,8 @@
         } else {
           statusBadgeHtml = '<span class="badge badge-dev">В разработке</span>';
         }
+
+        const archiveBadgeHtml = isArchive ? '<span class="badge badge-archive">Архив</span>' : '';
 
         const card = document.createElement('div');
         card.className = `card`;
@@ -2173,10 +2948,11 @@
                 <div class="card-logo-frame" title="Логотип игры">LOGO</div>
                 <div class="card-title">${item.name}</div>
               </div>
-              <div class="badge-container">
-                ${statusBadgeHtml}
-                ${showAiBadge ? '<span class="badge badge-ai">AI</span>' : ''}
-              </div>
+            </div>
+            <div class="badge-container">
+              ${statusBadgeHtml}
+              ${archiveBadgeHtml}
+              ${showAiBadge ? '<span class="badge badge-ai">AI</span>' : ''}
             </div>
             <div class="card-id">ID: ${item.id}</div>
             <div class="price-tag ${tagClass}">💰 Цена: ${price}</div>
@@ -2190,16 +2966,57 @@
       });
     }
 
+    function renderMainProjects() {
+      const grid = document.getElementById('mainProjectsGrid');
+      if (!grid) return;
+
+      grid.innerHTML = mainProjects.map(p => `
+        <div class="project-card ${p.color}" data-project-id="${p.id}">
+          <div class="project-title">${p.title}</div>
+          <div class="project-desc">${p.desc}</div>
+          <div class="project-link">${p.type === 'link' ? p.url : 'Открыть описание проекта →'}</div>
+        </div>
+      `).join('');
+
+      grid.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const proj = mainProjects.find(p => p.id === card.dataset.projectId);
+          if (!proj) return;
+          if (proj.type === 'link') {
+            window.open(proj.url, '_blank', 'noopener');
+          } else {
+            const item = database.games.find(g => g.id === proj.appId);
+            if (item) openModal(item);
+          }
+        });
+      });
+    }
+
+    function switchDevModalTab(tabName) {
+      document.querySelectorAll('#devModalTabs button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabName);
+      });
+      document.getElementById('devModalGiftsPanel').classList.toggle('active', tabName === 'gifts');
+      document.getElementById('devModalInterestsPanel').classList.toggle('active', tabName === 'interests');
+    }
+
     function openDevModal(dev) {
       devModalAvatar.src = dev.avatar;
       devModalName.innerText = dev.name;
       devModalTags.innerHTML = dev.tags.map(t => `<span class="prefix-tag ${t.class}">${t.text}</span>`).join('');
-      
-      if (dev.tg.startsWith('http')) {
-        devModalTg.innerHTML = `Мой лс в тг: <a href="${dev.tg}" target="_blank" rel="noopener noreferrer">${dev.tg}</a>`;
+
+      devModalTg.innerHTML = 'Скрыто';
+
+      const interests = dev.interests || [];
+      if (interests.length > 0) {
+        devModalInterests.innerHTML = interests.map(game => `
+          <div class="interest-card ${INTEREST_GAMES[game] || 'gray'}">${game}</div>
+        `).join('');
       } else {
-        devModalTg.innerHTML = `Мой лс в тг: ${dev.tg}`;
+        devModalInterests.innerHTML = '<div class="interests-empty">Интересы не указаны</div>';
       }
+
+      switchDevModalTab('gifts');
 
       devModalGifts.innerHTML = '';
 
@@ -2232,6 +3049,129 @@
       devModalOverlay.classList.add('active');
     }
 
+    let archiveStage = 'login';
+    let archiveLog = [];
+
+    function buildArchiveDocument() {
+      return `<div class="archive-doc">${ARCHIVE_DOCUMENT.map(block => {
+        if (block.type === 'heading') {
+          return `<div class="archive-heading">${escapeHtml(block.text)}</div>`;
+        }
+        if (block.type === 'subheading') {
+          return `<div class="archive-subheading">${escapeHtml(block.text)}</div>`;
+        }
+        if (block.type === 'link') {
+          return `<div class="archive-doc-line"><a href="${escapeHtml(block.text)}" target="_blank" rel="noopener noreferrer">${escapeHtml(block.text)}</a></div>`;
+        }
+        return `<p>${escapeHtml(block.text)}</p>`;
+      }).join('')}</div>`;
+    }
+
+    function archiveResetSession() {
+      archiveStage = 'login';
+      archiveLog = [
+        { text: 'ДОСТУП К ЗАКРЫТОМУ АРХИВУ BIGGAMES', cls: 'terminal-echo' },
+        { text: 'Введите логин и пароль. Архив доступен только для со статусом GL. ADMIN и выше.', cls: 'terminal-dim' },
+        { text: '', cls: '' }
+      ];
+    }
+
+    function renderArchiveTerminal() {
+      const logEl = document.getElementById('archiveTerminalLog');
+      const contentEl = document.getElementById('archiveTerminalContent');
+      const inputRow = document.getElementById('archiveTerminalInputRow');
+      if (!logEl || !contentEl || !inputRow) return;
+
+      logEl.innerHTML = archiveLog.map(line => `<div class="terminal-line ${line.cls || ''}">${line.text}</div>`).join('');
+      contentEl.innerHTML = archiveStage === 'content' ? buildArchiveDocument() : '';
+
+      if (archiveStage === 'content') {
+        inputRow.innerHTML = '<div class="terminal-line terminal-dim">biggames@archive:~$ <span class="terminal-cursor">█</span></div>';
+        logEl.scrollIntoView({ block: 'nearest' });
+        return;
+      }
+
+      const prompts = {
+        login: 'Login:',
+        password: 'Password:',
+        confirm: 'Напишите yes или no:'
+      };
+
+      inputRow.innerHTML = `
+        <div class="terminal-line terminal-prompt-row">
+          <span class="terminal-prompt">${prompts[archiveStage]}</span>
+          <input type="${archiveStage === 'password' ? 'password' : 'text'}" class="terminal-input" id="archiveTerminalInput" autocomplete="off" spellcheck="false">
+        </div>
+      `;
+
+      const input = document.getElementById('archiveTerminalInput');
+      input.focus();
+      input.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        handleArchiveInput(input.value);
+      });
+    }
+
+    function handleArchiveInput(value) {
+      const v = (value || '').trim();
+
+      if (archiveStage === 'login') {
+        archiveLog.push({ text: `Login: ${escapeHtml(v)}`, cls: 'terminal-echo' });
+
+        if (v.toLowerCase() !== ARCHIVE_ACCESS.login.toLowerCase()) {
+          archiveLog.push({ text: 'Ошибка: неверный логин.', cls: 'terminal-error' });
+          archiveLog.push({ text: 'Доступ к архиву запрещён.', cls: 'terminal-error' });
+          archiveLog.push({ text: '', cls: '' });
+        } else {
+          archiveStage = 'password';
+        }
+
+        renderArchiveTerminal();
+        return;
+      }
+
+      if (archiveStage === 'password') {
+        archiveLog.push({ text: `Password: ${'•'.repeat(v.length)}`, cls: 'terminal-echo' });
+
+        if (v !== ARCHIVE_ACCESS.password) {
+          archiveLog.push({ text: 'Ошибка: неверный пароль.', cls: 'terminal-error' });
+          archiveLog.push({ text: 'Сессия прервана. Требуется повторный вход.', cls: 'terminal-dim' });
+          archiveLog.push({ text: '', cls: '' });
+          archiveStage = 'login';
+        } else {
+          archiveStage = 'confirm';
+          archiveLog.push({ text: 'ВНИМАНИЕ: Данный архив предназначен для прочтения всем со статуса', cls: 'terminal-warn' });
+          archiveLog.push({ text: 'GL. ADMIN и выше при прочтении ниже статуса GL. ADMIN вы будете исключены из BigGames', cls: 'terminal-warn' });
+          archiveLog.push({ text: '', cls: '' });
+        }
+
+        renderArchiveTerminal();
+        return;
+      }
+
+      if (archiveStage === 'confirm') {
+        archiveLog.push({ text: `Напишите yes или no: ${escapeHtml(v)}`, cls: 'terminal-echo' });
+        const answer = v.toLowerCase();
+
+        if (answer === 'yes') {
+          archiveStage = 'content';
+          archiveLog.push({ text: 'Доступ к архиву открыт.', cls: 'terminal-echo' });
+          archiveLog.push({ text: 'biggames@archive:~$ cat archive_biggames.txt', cls: 'terminal-dim' });
+        } else if (answer === 'no') {
+          archiveStage = 'login';
+          archiveLog = [
+            { text: 'Вы отказались от просмотра архива. Сессия закрыта.', cls: 'terminal-dim' },
+            { text: '', cls: '' }
+          ];
+        } else {
+          archiveLog.push({ text: 'Некорректный ответ. Введите yes или no.', cls: 'terminal-error' });
+        }
+
+        renderArchiveTerminal();
+      }
+    }
+
     function renderStaticPage(tab) {
       if (tab === 'home') {
         staticPageContainer.innerHTML = `
@@ -2239,18 +3179,33 @@
             <h2>🔥 Главные ссылки</h2>
             <div class="social-grid" style="margin-top: 10px;">
               <a href="https://youtube.com/@biggames-d4b?si=kiEXdKUR1pQnVaF5" target="_blank" class="social-card color-red">
-                <div class="social-title">YouTube канал BigGames</div>
+                <div class="social-head">
+                  ${renderSocialIcons(['youtube'], 'YouTube канал BigGames')}
+                  <div class="social-title">YouTube канал BigGames</div>
+                </div>
                 <div class="social-link-text">youtube.com/@biggames-d4b</div>
               </a>
               <a href="https://t.me/biggamesstudio" target="_blank" class="social-card color-blue">
-                <div class="social-title">Чат в Telegram BigGames</div>
+                <div class="social-head">
+                  ${renderSocialIcons(['telegram'], 'Чат в Telegram BigGames')}
+                  <div class="social-title">Чат в Telegram BigGames</div>
+                </div>
                 <div class="social-link-text">t.me/biggamesstudio</div>
               </a>
               <a href="https://discord.gg/YsTqDSpDg" target="_blank" class="social-card color-red">
-                <div class="social-title">Сервер в ErrorMessage</div>
+                <div class="social-head">
+                  ${renderSocialIcons(['discord'], 'Сервер в ErrorMessage')}
+                  <div class="social-title">Сервер в ErrorMessage</div>
+                </div>
                 <div class="social-link-text">discord.gg/YsTqDSpDg</div>
               </a>
             </div>
+          </div>
+
+          <div class="static-page" style="margin-bottom: 30px;">
+            <h2>⭐ Главные проекты</h2>
+            <p>Ключевые проекты студии BigGames:</p>
+            <div class="projects-grid" id="mainProjectsGrid"></div>
           </div>
 
           <div class="static-page">
@@ -2279,12 +3234,17 @@
             <a href="https://t.me/crashverse_battles" target="_blank" rel="noopener noreferrer">https://t.me/crashverse_battles</a></p>
           </div>
         `;
+
+        renderMainProjects();
       } else if (tab === 'socials') {
         let socialsHtml = '';
         socialsList.forEach(soc => {
           socialsHtml += `
             <a href="${soc.url}" target="_blank" rel="noopener noreferrer" class="social-card color-${soc.color}">
-              <div class="social-title">${soc.name}</div>
+              <div class="social-head">
+                ${renderSocialIcons(soc.icons, soc.name)}
+                <div class="social-title">${soc.name}</div>
+              </div>
               <div class="social-link-text">${soc.url !== '#' ? soc.url : 'Ссылка временно отсутствует'}</div>
             </a>
           `;
@@ -2302,6 +3262,19 @@
       } else if (tab === 'about') {
         let contentHtml = `<p><strong>BigGames</strong> — независимая студия разработки видеоигр, утилит, модификаций и приложений для ПК и мобильных устройств.</p>`;
         staticPageContainer.innerHTML = `<div class="static-page"><h2>О нас</h2>${contentHtml}</div>`;
+      } else if (tab === 'archives') {
+        staticPageContainer.innerHTML = `
+          <div class="static-page archive-page">
+            <h2>// АРХИВ</h2>
+            <div class="archive-terminal">
+              <div id="archiveTerminalLog"></div>
+              <div id="archiveTerminalContent"></div>
+              <div id="archiveTerminalInputRow"></div>
+            </div>
+          </div>
+        `;
+        archiveResetSession();
+        renderArchiveTerminal();
       } else if (tab === 'developers') {
         let devsHtml = '';
         developersList.forEach(dev => {
@@ -2363,7 +3336,7 @@
                   <div class="setting-desc">Вставьте ссылку на видео или прямой эфир и нажмите запустить</div>
                 </div>
                 <div style="display: flex; gap: 10px;">
-                  <input type="text" id="inlineYoutubeUrlInput" class="select-input" style="flex: 1;" placeholder="https://youtube.com/... или https://twitch.tv/...">
+                  <input type="text" id="inlineYoutubeUrlInput" class="select-input" style="flex: 1;" placeholder="https://youtube.com/... или https://twitch.tv/..." value="${escapeHtml(lastMediaUrl)}">
                   <button id="inlineApplyMusicBtn" class="btn-toggle-music" style="background: #34c759;">Запустить</button>
                 </div>
                 <button id="musicToggleBtn" class="btn-toggle-music ${isMusicPlaying ? 'active' : ''}" style="margin-top: 5px;">
@@ -2397,17 +3370,15 @@
         });
 
         document.getElementById('inlineApplyMusicBtn').addEventListener('click', () => {
-          const inputVal = document.getElementById('inlineYoutubeUrlInput').value.trim();
-          const ytId = extractYouTubeId(inputVal);
-          const twitchChannel = extractTwitchChannel(inputVal);
+          const input = document.getElementById('inlineYoutubeUrlInput');
+          const url = input.value.trim() || lastMediaUrl;
 
-          if (ytId) {
-            playYouTube(ytId);
-          } else if (twitchChannel) {
-            playTwitch(twitchChannel);
-          } else {
-            alert('Некорректная ссылка на YouTube или Twitch');
+          if (!playMediaUrl(url)) {
+            alert(url ? 'Некорректная ссылка на YouTube или Twitch' : 'Вставьте ссылку на YouTube или Twitch');
+            return;
           }
+
+          input.value = lastMediaUrl;
         });
 
         document.getElementById('sansToggleBtn').addEventListener('click', () => {
@@ -2424,12 +3395,20 @@
           if (isMusicPlaying) {
             stopMusic();
           } else {
-            const inputVal = document.getElementById('inlineYoutubeUrlInput') ? document.getElementById('inlineYoutubeUrlInput').value.trim() : '';
-            const ytId = extractYouTubeId(inputVal);
-            const twitchChannel = extractTwitchChannel(inputVal);
-            if (ytId) playYouTube(ytId);
-            else if (twitchChannel) playTwitch(twitchChannel);
-            else alert('Пожалуйста, введите ссылку на YouTube или Twitch в поле настроек выше.');
+            const input = document.getElementById('inlineYoutubeUrlInput');
+            const url = (input.value.trim() || lastMediaUrl);
+
+            if (!url) {
+              alert('Пожалуйста, введите ссылку на YouTube или Twitch в поле настроек выше.');
+              return;
+            }
+
+            if (!playMediaUrl(url)) {
+              alert('Некорректная ссылка на YouTube или Twitch');
+              return;
+            }
+
+            input.value = lastMediaUrl;
           }
         });
       }
@@ -2444,7 +3423,11 @@
     function extractTwitchChannel(url) {
       if (!url) return null;
       let match = url.match(/(?:twitch\.tv\/)([\w_-]+)/i);
-      return match ? match[1] : null;
+      if (!match) return null;
+      const channel = match[1];
+      const reserved = ['videos', 'video', 'directory', 'downloads', 'jobs', 'p', 'search', 'settings', 'subscriptions', 'login', 'signup'];
+      if (reserved.includes(channel.toLowerCase())) return null;
+      return channel;
     }
 
     init();
