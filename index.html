@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BigGames — Официальный Портал</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-color: #0d0d11;
@@ -43,7 +46,556 @@
       --input-bg: #ffffff;
       --input-border: #d0d0dc;
       --icon-bg: rgba(0, 0, 0, 0.06);
+      --particle-bg: rgba(0, 0, 0, 0.03);
+      --particle-border: rgba(0, 0, 0, 0.1);
     }
+
+    body.theme-halloween {
+      --bg-color: #050505;
+      --card-bg: #170f08;
+      --card-border: #7a3a00;
+      --accent-color: #ff6a00;
+      --accent-hover: #ff8a3d;
+      --text-main: #ffe8d6;
+      --text-muted: #b06a35;
+      --dev-status: #ff9500;
+      --ready-status: #ffb340;
+      --header-bg: rgba(20, 10, 4, 0.9);
+      --nav-bg: #140b05;
+      --dev-card-bg: #1c130a;
+      --inner-box-bg: #120b06;
+      --input-bg: #1c130a;
+      --input-border: #7a3a00;
+      --particle-bg: rgba(255, 106, 0, 0.04);
+      --particle-border: rgba(255, 106, 0, 0.12);
+    }
+
+    body.theme-autumn {
+      --bg-color: #1a0f08;
+      --card-bg: #241510;
+      --card-border: #5e3a20;
+      --accent-color: #e67e22;
+      --accent-hover: #f09a4a;
+      --text-main: #f8e8d8;
+      --text-muted: #a97e5a;
+      --dev-status: #ffb347;
+      --ready-status: #7bc47f;
+      --header-bg: rgba(30, 18, 10, 0.9);
+      --nav-bg: #221410;
+      --dev-card-bg: #2a1c14;
+      --inner-box-bg: #1c130c;
+      --input-bg: #2a1c14;
+      --input-border: #5e3a20;
+      --particle-bg: rgba(230, 126, 34, 0.05);
+      --particle-border: rgba(230, 126, 34, 0.14);
+    }
+
+    body.theme-summer {
+      --bg-color: #04120a;
+      --card-bg: #071a10;
+      --card-border: #14532d;
+      --accent-color: #22c55e;
+      --accent-hover: #4ade80;
+      --text-main: #dcf5e4;
+      --text-muted: #6fae8a;
+      --dev-status: #facc15;
+      --ready-status: #4ade80;
+      --header-bg: rgba(8, 28, 18, 0.9);
+      --nav-bg: #071a10;
+      --dev-card-bg: #0b2417;
+      --inner-box-bg: #06160e;
+      --input-bg: #0b2417;
+      --input-border: #14532d;
+      --particle-bg: rgba(34, 197, 94, 0.05);
+      --particle-border: rgba(34, 197, 94, 0.14);
+    }
+
+    body.theme-spring {
+      --bg-color: #2b0a1e;
+      --card-bg: #3a1030;
+      --card-border: #8e2a6e;
+      --accent-color: #ff69b4;
+      --accent-hover: #ff9ec7;
+      --text-main: #fde3f0;
+      --text-muted: #c07a9e;
+      --dev-status: #ffd60a;
+      --ready-status: #34c759;
+      --header-bg: rgba(40, 10, 28, 0.9);
+      --nav-bg: #300e22;
+      --dev-card-bg: #3a1228;
+      --inner-box-bg: #2a0d1e;
+      --input-bg: #3a1228;
+      --input-border: #8e2a6e;
+      --particle-bg: rgba(255, 105, 180, 0.05);
+      --particle-border: rgba(255, 105, 180, 0.14);
+    }
+
+    body.theme-may {
+      --bg-color: #2a0505;
+      --card-bg: #3d0d0d;
+      --card-border: #8e1a1a;
+      --accent-color: #ff0044;
+      --accent-hover: #ff3355;
+      --text-main: #fde3e3;
+      --text-muted: #c07a7a;
+      --dev-status: #ffd60a;
+      --ready-status: #34c759;
+      --header-bg: rgba(40, 8, 8, 0.9);
+      --nav-bg: #2e0707;
+      --dev-card-bg: #380c0c;
+      --inner-box-bg: #2a0606;
+      --input-bg: #380c0c;
+      --input-border: #8e1a1a;
+      --particle-bg: rgba(255, 0, 68, 0.05);
+      --particle-border: rgba(255, 0, 68, 0.14);
+    }
+
+    body.theme-winter {
+      --bg-color: #050a18;
+      --card-bg: #0a1428;
+      --card-border: #1e3a66;
+      --accent-color: #4da6ff;
+      --accent-hover: #7ab8ff;
+      --text-main: #e0ecff;
+      --text-muted: #7e9cc4;
+      --dev-status: #ffd60a;
+      --ready-status: #34c759;
+      --header-bg: rgba(8, 14, 30, 0.9);
+      --nav-bg: #080e1e;
+      --dev-card-bg: #0c1728;
+      --inner-box-bg: #080e1e;
+      --input-bg: #0c1728;
+      --input-border: #1e3a66;
+      --particle-bg: rgba(77, 166, 255, 0.05);
+      --particle-border: rgba(77, 166, 255, 0.14);
+    }
+
+    body.theme-newyear {
+      --bg-color: #03081a;
+      --card-bg: #071127;
+      --card-border: #1e4a8e;
+      --accent-color: #66aaff;
+      --accent-hover: #99c2ff;
+      --text-main: #e0ecff;
+      --text-muted: #7e9cc4;
+      --dev-status: #ffd60a;
+      --ready-status: #34c759;
+      --header-bg: rgba(6, 12, 26, 0.9);
+      --nav-bg: #060d1a;
+      --dev-card-bg: #0a1524;
+      --inner-box-bg: #060d1a;
+      --input-bg: #0a1524;
+      --input-border: #1e4a8e;
+      --particle-bg: rgba(102, 170, 255, 0.05);
+      --particle-border: rgba(102, 170, 255, 0.14);
+    }
+
+    body.region-errorgames {
+      --bg-color: #140505;
+      --card-bg: #221010;
+      --card-border: #6e1414;
+      --accent-color: #ff2d2d;
+      --accent-hover: #ff5555;
+      --text-main: #ffdcdc;
+      --text-muted: #c07a7a;
+      --dev-status: #ff5555;
+      --ready-status: #ff8a8a;
+      --header-bg: rgba(30, 8, 8, 0.9);
+      --nav-bg: #200c0c;
+      --dev-card-bg: #2a1212;
+      --inner-box-bg: #180a0a;
+      --input-bg: #2a1212;
+      --input-border: #6e1414;
+      --particle-bg: rgba(255, 45, 45, 0.05);
+      --particle-border: rgba(255, 45, 45, 0.12);
+    }
+
+    body.region-glitchgames {
+      --bg-color: #1a0414;
+      --card-bg: #2a0f22;
+      --card-border: #8e2a6e;
+      --accent-color: #ff2d85;
+      --accent-hover: #ff5aa0;
+      --text-main: #ffdcef;
+      --text-muted: #c07a9e;
+      --dev-status: #ff2d85;
+      --ready-status: #ff8ac2;
+      --header-bg: rgba(35, 8, 22, 0.9);
+      --nav-bg: #2a0c20;
+      --dev-card-bg: #341022;
+      --inner-box-bg: #260a1c;
+      --input-bg: #341022;
+      --input-border: #8e2a6e;
+      --particle-bg: rgba(255, 45, 133, 0.05);
+      --particle-border: rgba(255, 45, 133, 0.12);
+    }
+
+    body.region-science {
+      --bg-color: #008080;
+      --card-bg: #c0c0c0;
+      --card-border: #808080;
+      --accent-color: #000080;
+      --accent-hover: #1084d0;
+      --text-main: #000000;
+      --text-muted: #404040;
+      --dev-status: #808000;
+      --ready-status: #008000;
+      --header-bg: #000080;
+      --nav-bg: #c0c0c0;
+      --dev-card-bg: #d4d0c8;
+      --inner-box-bg: #c0c0c0;
+      --input-bg: #ffffff;
+      --input-border: #808080;
+      --particle-bg: rgba(0, 0, 0, 0.05);
+      --particle-border: rgba(0, 0, 128, 0.2);
+    }
+
+    body.region-science,
+    body.region-science * {
+      font-family: Tahoma, "MS Sans Serif", "Segoe UI", sans-serif;
+    }
+
+    body.region-science header {
+      background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+      border-bottom: 2px solid #000000;
+    }
+
+    body.region-science .logo-text {
+      color: #ffffff;
+    }
+
+    body.region-science .logo-box.logo-science {
+      background: #c0c0c0;
+      color: #000080;
+      border: 2px solid;
+      border-color: #ffffff #404040 #404040 #ffffff;
+      border-radius: 0;
+    }
+
+    body.region-science .nav-tabs {
+      background: #c0c0c0;
+      padding: 4px 8px;
+      gap: 2px;
+      border-bottom: 2px solid #808080;
+    }
+
+    body.region-science .nav-tab {
+      background: #c0c0c0;
+      color: #000000;
+      border: 2px solid;
+      border-color: #ffffff #404040 #404040 #ffffff;
+      border-radius: 0;
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+
+    body.region-science .nav-tab:hover {
+      color: #000080;
+    }
+
+    body.region-science .nav-tab.active {
+      background: #d4d0c8;
+      color: #000080;
+      border-color: #404040 #ffffff #ffffff #404040;
+    }
+
+    body.region-science .project-card,
+    body.region-science .static-page,
+    body.region-science .setting-item {
+      background: #c0c0c0;
+      border: 2px solid;
+      border-color: #ffffff #404040 #404040 #ffffff;
+      border-radius: 0;
+      box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #808080;
+      color: #000000;
+    }
+
+    body.region-science .select-input,
+    body.region-science .search-box input {
+      background: #ffffff;
+      border: 2px solid;
+      border-color: #808080 #ffffff #ffffff #808080;
+      border-radius: 0;
+      color: #000000;
+    }
+
+    body.region-science .filter-chip,
+    body.region-science .btn-toggle-sans,
+    body.region-science .btn-toggle-music,
+    body.region-science .btn-download-link,
+    body.region-science .btn-upload {
+      background: #c0c0c0;
+      color: #000000;
+      border: 2px solid;
+      border-color: #ffffff #404040 #404040 #ffffff;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    body.region-science .filter-chip.active,
+    body.region-science .btn-toggle-sans.active,
+    body.region-science .btn-toggle-music.active {
+      background: #d4d0c8;
+      color: #000080;
+      border-color: #404040 #ffffff #ffffff #404040;
+    }
+
+    body.region-science .modal-card {
+      background: #c0c0c0;
+      border: 2px solid;
+      border-color: #ffffff #404040 #404040 #ffffff;
+      border-radius: 0;
+      color: #000000;
+    }
+
+    body.region-cube {
+      --bg-color: #2b2b2b;
+      --card-bg: #3d3d3d;
+      --card-border: #5a5a5a;
+      --accent-color: #7fbf5f;
+      --accent-hover: #9ed67f;
+      --text-main: #e8e8e8;
+      --text-muted: #a8a8a8;
+      --dev-status: #e8c15a;
+      --ready-status: #7fbf5f;
+      --header-bg: #1f1f1f;
+      --nav-bg: #333333;
+      --dev-card-bg: #454545;
+      --inner-box-bg: #383838;
+      --input-bg: #1f1f1f;
+      --input-border: #5a5a5a;
+      --particle-bg: rgba(255, 255, 255, 0.04);
+      --particle-border: rgba(255, 255, 255, 0.12);
+    }
+
+    body.region-cube,
+    body.region-cube * {
+      font-family: "Silkscreen", "Press Start 2P", "Minecraft", "Minecraftia", "Courier New", monospace;
+    }
+
+    body.region-cube .logo-text {
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+
+    body.region-cube .logo-box.logo-cube {
+      background: #6b6b6b;
+      color: #f0f0f0;
+      border: 3px solid;
+      border-color: #9a9a9a #3a3a3a #3a3a3a #9a9a9a;
+      border-radius: 0;
+      box-shadow: none;
+      text-shadow: 2px 2px 0 #2b2b2b;
+      padding: 4px 10px;
+      font-size: 16px;
+    }
+
+    body.region-cube .nav-tabs {
+      gap: 4px;
+      padding: 4px 8px;
+    }
+
+    body.region-cube .nav-tab {
+      background: #3d3d3d;
+      color: #d8d8d8;
+      border: 2px solid;
+      border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+      border-radius: 0;
+      padding: 10px 10px;
+      font-size: 10px;
+    }
+
+    body.region-cube .nav-tab.active {
+      background: #5a5a5a;
+      color: #ffffff;
+      border-color: #1a1a1a #6b6b6b #6b6b6b #1a1a1a;
+    }
+
+    body.region-cube .project-card,
+    body.region-cube .static-page,
+    body.region-cube .setting-item {
+      background: #3d3d3d;
+      border: 3px solid;
+      border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    body.region-cube .select-input,
+    body.region-cube .search-box input {
+      background: #1f1f1f;
+      border: 2px solid;
+      border-color: #1a1a1a #6b6b6b #6b6b6b #1a1a1a;
+      border-radius: 0;
+      color: #e8e8e8;
+    }
+
+    body.region-cube .filter-chip,
+    body.region-cube .btn-toggle-sans,
+    body.region-cube .btn-toggle-music,
+    body.region-cube .btn-download-link,
+    body.region-cube .btn-upload {
+      background: #4a4a4a;
+      color: #f0f0f0;
+      border: 2px solid;
+      border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+      border-radius: 0;
+      box-shadow: none;
+      font-size: 10px;
+    }
+
+    body.region-cube .filter-chip.active,
+    body.region-cube .btn-toggle-sans.active,
+    body.region-cube .btn-toggle-music.active {
+      background: #5f7f4f;
+      color: #ffffff;
+      border-color: #1a1a1a #6b6b6b #6b6b6b #1a1a1a;
+    }
+
+    body.region-cube .modal-card {
+      background: #3d3d3d;
+      border: 3px solid;
+      border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+      border-radius: 0;
+      color: #e8e8e8;
+    }
+
+    .build-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .build-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--inner-box-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+    }
+
+    .build-item .prefix-tag.prefix-white {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .build-name {
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 15px;
+    }
+
+    .textbook-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+      gap: 10px;
+    }
+
+    .textbook-item {
+      padding: 12px 14px;
+      background: var(--inner-box-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 14px;
+    }
+
+    body.region-science .build-item,
+    body.region-science .textbook-item {
+      background: #d4d0c8;
+      border: 2px solid;
+      border-color: #ffffff #404040 #404040 #ffffff;
+      border-radius: 0;
+    }
+
+    body.region-science .build-item .prefix-tag.prefix-white {
+      color: #ffffff;
+      background: #000080;
+      border-color: #404040;
+    }
+
+    body.region-cube .build-item,
+    body.region-cube .textbook-item {
+      background: #383838;
+      border: 2px solid;
+      border-color: #6b6b6b #1a1a1a #1a1a1a #6b6b6b;
+      border-radius: 0;
+    }
+
+    #styleParticleLayer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 9998;
+    }
+
+    .style-particle {
+      position: absolute;
+      top: -5vh;
+      display: block;
+      will-change: transform;
+    }
+
+    .style-particle.autumn {
+      background: #e67e22;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: styleFallAutumn linear infinite;
+    }
+
+    .style-particle.spring {
+      background: #ff9ec7;
+      border-radius: 50%;
+      animation: styleFallSpring linear infinite;
+    }
+
+    .style-particle.may {
+      background: #ff2244;
+      border-radius: 50%;
+      animation: styleFallMay linear infinite;
+    }
+
+    .style-particle.summer {
+      background: #27ae60;
+      border-radius: 50%;
+      opacity: 0.55;
+      animation: styleFallSummer linear infinite;
+    }
+
+    .style-particle.halloween {
+      background: #ff6a00;
+      border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+      box-shadow: 0 0 14px rgba(255, 106, 0, 0.55);
+      animation: styleFallHalloween linear infinite;
+    }
+
+    .style-particle.winter {
+      background: #dff3ff;
+      border-radius: 50%;
+      opacity: 0.9;
+      animation: styleFallWinter linear infinite;
+    }
+
+    .style-particle.newyear {
+      background: #ffffff;
+      border-radius: 50%;
+      opacity: 0.95;
+      animation: styleFallWinter linear infinite;
+      animation-duration: 5s;
+    }
+
+    @keyframes styleFallAutumn { from { transform: translateY(-5vh) rotate(0deg); } to { transform: translateY(110vh) rotate(360deg); } }
+    @keyframes styleFallSpring { from { transform: translateY(-5vh) rotate(0deg); } to { transform: translateY(110vh) rotate(300deg); } }
+    @keyframes styleFallMay { from { transform: translateY(-5vh) rotate(0deg); } to { transform: translateY(110vh) rotate(270deg); } }
+    @keyframes styleFallSummer { from { transform: translateY(-5vh) translateX(0); } to { transform: translateY(110vh) translateX(-50px); } }
+    @keyframes styleFallHalloween { from { transform: translateY(-5vh) translateX(0); } to { transform: translateY(110vh) translateX(60px) rotate(90deg); } }
+    @keyframes styleFallWinter { from { transform: translateY(-5vh) translateX(0); } to { transform: translateY(105vh) translateX(20px); } }
 
     * {
       box-sizing: border-box;
@@ -1580,6 +2132,8 @@
   <nav>
     <ul class="nav-tabs" id="navTabs">
       <li class="nav-tab active" data-tab="home">Главная</li>
+      <li class="nav-tab" data-tab="builds">Сборки</li>
+      <li class="nav-tab" data-tab="textbooks">Учебники</li>
       <li class="nav-tab" data-tab="games">Игры</li>
       <li class="nav-tab" data-tab="apps">Приложения</li>
       <li class="nav-tab" data-tab="programs">Программы</li>
@@ -1920,6 +2474,50 @@
         type: 'app',
         appId: 'crashversegame20'
       }
+    ];
+
+    const CUBE_BUILDS = [
+      'DungeonVisual',
+      'DungeonVisual Cheat',
+      'DungeonVisual Legit'
+    ];
+
+    const SCIENCE_TEXTBOOKS = [
+      'Азбука',
+      'Прописи',
+      'Обучение грамоте',
+      'Русский язык',
+      'Математика',
+      'Английский язык',
+      'Алгебра',
+      'Геометрия',
+      'Математика и конструирование',
+      'География',
+      'Окружающий мир',
+      'Обществознание',
+      'Естествознание',
+      'Химия',
+      'Физика',
+      'Биология',
+      'Музыка',
+      'Труд',
+      'Технология',
+      'Труд (Технология)',
+      'Математика облачных наук',
+      'Математика высших наук',
+      'Китайский язык',
+      'Физкультура',
+      'История',
+      'Литература',
+      'Литературное чтение',
+      'Смысловое чтение',
+      'ИЗО',
+      'Психология',
+      'Любовь как наука',
+      'Философия',
+      'Классный час+',
+      'Проектная деятельность',
+      'Странология'
     ];
 
     const ARCHIVE_ACCESS = {
@@ -2363,9 +2961,10 @@
     let aboutData = { texts: [], links: [] };
     let currentTab = 'home';
     let currentFilter = 'all';
-    let currentLogoType = 'biggames';
+    let currentRegion = 'biggames';
 
     let currentTheme = 'dark';
+    let currentThemeStyle = 'none';
     let isSansVisible = false;
     let isMusicPlaying = false;
     let lastMediaUrl = '';
@@ -2439,6 +3038,7 @@
 
     function init() {
       setupEvents();
+      applyRegion(currentRegion);
       renderTab(currentTab);
     }
 
@@ -2866,19 +3466,143 @@
       renderTab(currentTab);
     }
 
-    function updateLogoStyle() {
+    const REGION_ONLY_TABS = ['builds', 'textbooks'];
+
+    const REGION_TABS = {
+      biggames: null,
+      errorgames: ['settings', 'developers', 'socials', 'about'],
+      glitchgames: ['settings', 'developers', 'socials', 'about'],
+      science: ['textbooks', 'settings', 'developers', 'socials', 'about'],
+      cube: ['builds', 'settings', 'developers', 'socials', 'about']
+    };
+
+    let originalNavOrder = null;
+
+    function updateNavVisibility(region) {
+      const navTabs = document.getElementById('navTabs');
+      if (!navTabs) return;
+      const tabs = [...navTabs.querySelectorAll('.nav-tab')];
+      if (!originalNavOrder) {
+        originalNavOrder = tabs.slice();
+      }
+      const allowed = REGION_TABS[region];
+      tabs.forEach(tabEl => {
+        const show = allowed
+          ? allowed.includes(tabEl.dataset.tab)
+          : !REGION_ONLY_TABS.includes(tabEl.dataset.tab);
+        tabEl.style.display = show ? '' : 'none';
+        tabEl.style.order = '';
+      });
+      if (allowed) {
+        allowed.forEach(name => {
+          const el = navTabs.querySelector('.nav-tab[data-tab="' + name + '"]');
+          if (el) navTabs.appendChild(el);
+        });
+      } else {
+        originalNavOrder.forEach(el => navTabs.appendChild(el));
+      }
+    }
+
+    function applyRegion(region) {
+      currentRegion = region;
+      document.body.classList.forEach(cls => {
+        if (cls.startsWith('region-')) document.body.classList.remove(cls);
+      });
+      if (region === 'errorgames') {
+        document.body.classList.add('region-errorgames');
+      } else if (region === 'glitchgames') {
+        document.body.classList.add('region-glitchgames');
+      } else if (region === 'science') {
+        document.body.classList.add('region-science');
+      } else if (region === 'cube') {
+        document.body.classList.add('region-cube');
+      }
+
       const box = document.getElementById('headerLogoBox');
-      if (!box) return;
-      box.className = 'logo-box';
-      if (currentLogoType === 'biggames') {
-        box.classList.add('logo-biggames');
-        box.innerText = 'BG';
-      } else if (currentLogoType === 'errorgames') {
-        box.classList.add('logo-errorgames');
-        box.innerText = 'EG';
-      } else if (currentLogoType === 'glitchgames') {
-        box.classList.add('logo-glitchgames');
-        box.innerText = 'GG';
+      if (box) {
+        box.className = 'logo-box';
+        if (region === 'errorgames') {
+          box.classList.add('logo-errorgames');
+          box.innerText = 'EG';
+        } else if (region === 'glitchgames') {
+          box.classList.add('logo-glitchgames');
+          box.innerText = 'GG';
+        } else if (region === 'science') {
+          box.classList.add('logo-science');
+          box.innerText = 'BS';
+        } else if (region === 'cube') {
+          box.classList.add('logo-cube');
+          box.innerText = 'BC';
+        } else {
+          box.classList.add('logo-biggames');
+          box.innerText = 'BG';
+        }
+      }
+
+      updateNavVisibility(region);
+
+      const allowed = REGION_TABS[region];
+      let target = currentTab || 'home';
+      if (allowed ? !allowed.includes(target) : REGION_ONLY_TABS.includes(target)) {
+        target = allowed ? 'about' : 'home';
+      }
+      document.querySelectorAll('.nav-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.tab === target);
+      });
+
+      if (typeof renderTab === 'function') {
+        renderTab(target);
+      }
+    }
+
+    const STYLE_THEMES = {
+      halloween: { particles: 'halloween', count: 26, sizeMin: 18, sizeMax: 46, durationMin: 9, durationMax: 20, delayMax: 12 },
+      autumn: { particles: 'autumn', count: 40, sizeMin: 10, sizeMax: 26, durationMin: 12, durationMax: 26, delayMax: 20 },
+      summer: { particles: 'summer', count: 22, sizeMin: 10, sizeMax: 24, durationMin: 9, durationMax: 18, delayMax: 10 },
+      spring: { particles: 'spring', count: 34, sizeMin: 8, sizeMax: 20, durationMin: 11, durationMax: 22, delayMax: 18 },
+      may: { particles: 'may', count: 26, sizeMin: 10, sizeMax: 24, durationMin: 10, durationMax: 20, delayMax: 14 },
+      winter: { particles: 'winter', count: 60, sizeMin: 2, sizeMax: 5, durationMin: 8, durationMax: 16, delayMax: 8 },
+      newyear: { particles: 'newyear', count: 60, sizeMin: 2, sizeMax: 5, durationMin: 5, durationMax: 9, delayMax: 6 }
+    };
+
+    function clearStyleParticles() {
+      const layer = document.getElementById('styleParticleLayer');
+      if (layer) layer.remove();
+    }
+
+    function spawnStyleParticles(style) {
+      clearStyleParticles();
+      const theme = STYLE_THEMES[style];
+      if (!theme) return;
+      const layer = document.createElement('div');
+      layer.id = 'styleParticleLayer';
+      document.body.appendChild(layer);
+      for (let i = 0; i < theme.count; i++) {
+        const p = document.createElement('div');
+        p.className = 'style-particle ' + theme.particles;
+        const size = theme.sizeMin + Math.random() * (theme.sizeMax - theme.sizeMin);
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = (Math.random() * 100) + '%';
+        const duration = theme.durationMin + Math.random() * (theme.durationMax - theme.durationMin);
+        p.style.animationDuration = duration + 's';
+        p.style.animationDelay = (Math.random() * theme.delayMax) + 's';
+        layer.appendChild(p);
+      }
+    }
+
+    function applyThemeStyle(style) {
+      currentThemeStyle = style;
+      document.body.classList.forEach(cls => {
+        if (cls.startsWith('theme-')) document.body.classList.remove(cls);
+      });
+      if (style && style !== 'none') {
+        document.body.classList.add('theme-' + style);
+      }
+      if (style && style !== 'none') {
+        spawnStyleParticles(style);
+      } else {
+        clearStyleParticles();
       }
     }
 
@@ -2886,7 +3610,7 @@
       currentTab = tab;
       const searchQuery = searchInput.value.toLowerCase().trim();
 
-      if (['about', 'developers', 'settings', 'socials', 'home', 'archives'].includes(tab)) {
+      if (['about', 'developers', 'settings', 'socials', 'home', 'archives', 'builds', 'textbooks'].includes(tab)) {
         gridContainer.style.display = 'none';
         controlsBar.style.display = 'none';
         staticPageContainer.style.display = 'block';
@@ -3262,6 +3986,29 @@
       } else if (tab === 'about') {
         let contentHtml = `<p><strong>BigGames</strong> — независимая студия разработки видеоигр, утилит, модификаций и приложений для ПК и мобильных устройств.</p>`;
         staticPageContainer.innerHTML = `<div class="static-page"><h2>О нас</h2>${contentHtml}</div>`;
+      } else if (tab === 'builds') {
+        const buildsHtml = CUBE_BUILDS.map(name => `
+          <div class="build-item">
+            <span class="prefix-tag prefix-white">КЛИЕНТ</span>
+            <span class="build-name">${escapeHtml(name)}</span>
+          </div>
+        `).join('');
+        staticPageContainer.innerHTML = `
+          <div class="static-page">
+            <h2>Сборки</h2>
+            <p>Клиентские сборки BigGames Cube:</p>
+            <div class="build-list">${buildsHtml}</div>
+          </div>
+        `;
+      } else if (tab === 'textbooks') {
+        const booksHtml = SCIENCE_TEXTBOOKS.map(name => `<div class="textbook-item">${escapeHtml(name)}</div>`).join('');
+        staticPageContainer.innerHTML = `
+          <div class="static-page">
+            <h2>Учебники</h2>
+            <p>Учебные материалы BigGames Science:</p>
+            <div class="textbook-grid">${booksHtml}</div>
+          </div>
+        `;
       } else if (tab === 'archives') {
         staticPageContainer.innerHTML = `
           <div class="static-page archive-page">
@@ -3312,13 +4059,15 @@
             <div class="settings-section">
               <div class="setting-item">
                 <div class="setting-info">
-                  <div class="setting-title">Логотип портала</div>
-                  <div class="setting-desc">Выберите стиль логотипа в шапке сайта</div>
+                  <div class="setting-title">Область (Регион)</div>
+                  <div class="setting-desc">Выберите регион: BigGames, ErrorGames, GlitchGames, BigGames Science, BigGames Cube</div>
                 </div>
-                <select id="logoTypeSelect" class="select-input">
-                  <option value="biggames" ${currentLogoType === 'biggames' ? 'selected' : ''}>BigGames (стандартный)</option>
-                  <option value="errorgames" ${currentLogoType === 'errorgames' ? 'selected' : ''}>ErrorGames (красно-синий)</option>
-                  <option value="glitchgames" ${currentLogoType === 'glitchgames' ? 'selected' : ''}>GlitchGames (розовый)</option>
+                <select id="regionSelect" class="select-input">
+                  <option value="biggames" ${currentRegion === 'biggames' ? 'selected' : ''}>BigGames</option>
+                  <option value="errorgames" ${currentRegion === 'errorgames' ? 'selected' : ''}>ErrorGames</option>
+                  <option value="glitchgames" ${currentRegion === 'glitchgames' ? 'selected' : ''}>GlitchGames</option>
+                  <option value="science" ${currentRegion === 'science' ? 'selected' : ''}>BigGames Science</option>
+                  <option value="cube" ${currentRegion === 'cube' ? 'selected' : ''}>BigGames Cube</option>
                 </select>
               </div>
               <div class="setting-item">
@@ -3328,6 +4077,22 @@
                 <select id="themeSelect" class="select-input">
                   <option value="dark" ${currentTheme === 'dark' ? 'selected' : ''}>Тёмная тема</option>
                   <option value="light" ${currentTheme === 'light' ? 'selected' : ''}>Светлая тема</option>
+                </select>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <div class="setting-title">Стиль сайта (цвета и частицы)</div>
+                  <div class="setting-desc">Выберите стиль: Нет, Хеллоуин, Осенний, Летний, Весенний, Майский, Зимний, Новогодний</div>
+                </div>
+                <select id="themeStyleSelect" class="select-input">
+                  <option value="none" ${currentThemeStyle === 'none' ? 'selected' : ''}>Нет (по умолчанию)</option>
+                  <option value="halloween" ${currentThemeStyle === 'halloween' ? 'selected' : ''}>Хеллоуин</option>
+                  <option value="autumn" ${currentThemeStyle === 'autumn' ? 'selected' : ''}>Осенний</option>
+                  <option value="summer" ${currentThemeStyle === 'summer' ? 'selected' : ''}>Летний</option>
+                  <option value="spring" ${currentThemeStyle === 'spring' ? 'selected' : ''}>Весенний</option>
+                  <option value="may" ${currentThemeStyle === 'may' ? 'selected' : ''}>Майский</option>
+                  <option value="winter" ${currentThemeStyle === 'winter' ? 'selected' : ''}>Зимний</option>
+                  <option value="newyear" ${currentThemeStyle === 'newyear' ? 'selected' : ''}>Новогодний</option>
                 </select>
               </div>
               <div class="setting-item" style="flex-direction: column; align-items: stretch; gap: 10px;">
@@ -3355,9 +4120,8 @@
           </div>
         `;
 
-        document.getElementById('logoTypeSelect').addEventListener('change', (e) => {
-          currentLogoType = e.target.value;
-          updateLogoStyle();
+        document.getElementById('regionSelect').addEventListener('change', (e) => {
+          applyRegion(e.target.value);
         });
 
         document.getElementById('themeSelect').addEventListener('change', (e) => {
@@ -3368,6 +4132,12 @@
             document.body.classList.remove('light-theme');
           }
         });
+
+        document.getElementById('themeStyleSelect').addEventListener('change', (e) => {
+          applyThemeStyle(e.target.value);
+        });
+
+        applyThemeStyle(currentThemeStyle);
 
         document.getElementById('inlineApplyMusicBtn').addEventListener('click', () => {
           const input = document.getElementById('inlineYoutubeUrlInput');
