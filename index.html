@@ -2133,6 +2133,7 @@
     <ul class="nav-tabs" id="navTabs">
       <li class="nav-tab active" data-tab="home">Главная</li>
       <li class="nav-tab" data-tab="builds">Сборки</li>
+      <li class="nav-tab" data-tab="servers">Сервера</li>
       <li class="nav-tab" data-tab="textbooks">Учебники</li>
       <li class="nav-tab" data-tab="games">Игры</li>
       <li class="nav-tab" data-tab="apps">Приложения</li>
@@ -2678,8 +2679,23 @@
         { name: 'NewLifeSimulator', id: 'newlifesimulator' },
         { name: 'NewLifeSimulator 2', id: 'newlifesimulator2' },
         { name: 'ArmyLife', id: 'armylife' },
-        { name: 'CRASHVERSE GAME 2.0', id: 'crashversegame20' }
       ],
+      apps: [
+        { name: 'BaseAIStudio 2.0', id: 'baseaistudio2' },
+        { name: 'BG ToolsPack', id: 'bgtoolspack2' },
+        { name: 'BG UniversalLauncher', id: 'bguniversallauncher2' },
+        { name: 'BG MinecraftLauncher', id: 'bgminecraftlauncher' },
+        { name: 'BG CountryBallsTale Launcher', id: 'bgcountryballstalelauncher2' }
+      ],
+      programs: [
+        { name: 'BG UniversalOS', id: 'bguniversalos' }
+      ],
+      servers: [
+        { name: 'BigGamesCraft', id: 'biggamescraft' }
+      ]
+    };
+
+    const errorGamesData = {
       apps: [
         { name: '📌 BigGames', id: 'biggames' },
         { name: 'BG GameCreator', id: 'bggamecreator' },
@@ -2800,7 +2816,10 @@
         { name: 'ER Windows XP Zver', id: 'erwindowsxpzver' },
         { name: 'ER Windows 10 (BigGames)', id: 'erwindows10biggames' },
         { name: 'ER Windows 9', id: 'erwindows9' }
-      ],
+      ]
+    };
+
+    Object.assign(database, {
       books: [
         { name: 'Crashverse(Animated)', id: 'crashverseanimated' },
         { name: 'Crashverse', id: 'crashverse' }
@@ -2817,7 +2836,7 @@
         { name: 'CountryBallsTaleAssets', id: 'countryballstaleassets' }
       ],
       archives: []
-    };
+    });
 
     let projectParamsData = {
       'countryballstale1': { engine: 'GameMaker', lang: 'GameMaker', format: 'exe', platforms: ['Windows'] },
@@ -2875,7 +2894,15 @@
       'erfastmessage': { engine: '-', lang: '-', format: 'exe', platforms: ['Windows'] },
       'portalspeedmod': { engine: '-', lang: '-', format: 'exe', platforms: ['Windows'] },
       'erwindows9': { engine: 'html', lang: 'JavaScript', format: 'exe', platforms: ['Windows'] },
-      'errormessagemobile': { engine: '-', lang: '-', format: 'apk', platforms: ['Android'] }
+      'errormessagemobile': { engine: '-', lang: '-', format: 'apk', platforms: ['Android'] },
+
+      'bguniversalos': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'baseaistudio2': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'bgtoolspack2': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'bguniversallauncher2': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'bgminecraftlauncher': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'bgcountryballstalelauncher2': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'biggamescraft': { engine: '-', lang: '-', format: '-', platforms: ['Windows'] }
     };
 
     let mainTxtData = {
@@ -3466,14 +3493,14 @@
       renderTab(currentTab);
     }
 
-    const REGION_ONLY_TABS = ['builds', 'textbooks'];
+    const REGION_ONLY_TABS = ['builds', 'textbooks', 'servers'];
 
     const REGION_TABS = {
       biggames: null,
-      errorgames: ['settings', 'developers', 'socials', 'about'],
+      errorgames: ['apps', 'programs', 'settings', 'developers', 'socials', 'about'],
       glitchgames: ['settings', 'developers', 'socials', 'about'],
       science: ['textbooks', 'settings', 'developers', 'socials', 'about'],
-      cube: ['builds', 'settings', 'developers', 'socials', 'about']
+      cube: ['builds', 'servers', 'settings', 'developers', 'socials', 'about']
     };
 
     let originalNavOrder = null;
@@ -3623,7 +3650,10 @@
       staticPageContainer.style.display = 'none';
 
       gridContainer.innerHTML = '';
-      const items = database[tab] || [];
+      let items = database[tab] || [];
+      if (currentRegion === 'errorgames' && (tab === 'apps' || tab === 'programs')) {
+        items = errorGamesData[tab] || [];
+      }
 
       const filtered = items.filter(item =>
         (item.name.toLowerCase().includes(searchQuery) ||
