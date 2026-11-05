@@ -2135,6 +2135,8 @@
       <li class="nav-tab" data-tab="builds">Сборки</li>
       <li class="nav-tab" data-tab="servers">Сервера</li>
       <li class="nav-tab" data-tab="textbooks">Учебники</li>
+      <li class="nav-tab" data-tab="tierlists">Тир листы</li>
+      <li class="nav-tab" data-tab="ratings">Оценки</li>
       <li class="nav-tab" data-tab="games">Игры</li>
       <li class="nav-tab" data-tab="apps">Приложения</li>
       <li class="nav-tab" data-tab="programs">Программы</li>
@@ -2144,6 +2146,7 @@
       <li class="nav-tab" data-tab="archives">Архивы</li>
       <li class="nav-tab" data-tab="socials">Соцсети</li>
       <li class="nav-tab" data-tab="about">О нас</li>
+      <li class="nav-tab" data-tab="partners">Партнеры</li>
       <li class="nav-tab" data-tab="developers">Разработчики</li>
       <li class="nav-tab" data-tab="settings">Настройки</li>
     </ul>
@@ -3493,14 +3496,14 @@
       renderTab(currentTab);
     }
 
-    const REGION_ONLY_TABS = ['builds', 'textbooks', 'servers'];
+    const REGION_ONLY_TABS = ['builds', 'textbooks', 'tierlists', 'ratings', 'servers'];
 
     const REGION_TABS = {
       biggames: null,
-      errorgames: ['apps', 'programs', 'settings', 'developers', 'socials', 'about'],
-      glitchgames: ['settings', 'developers', 'socials', 'about'],
-      science: ['textbooks', 'settings', 'developers', 'socials', 'about'],
-      cube: ['builds', 'servers', 'settings', 'developers', 'socials', 'about']
+      errorgames: ['apps', 'programs', 'settings', 'partners', 'developers', 'socials', 'about'],
+      glitchgames: ['settings', 'partners', 'developers', 'socials', 'about'],
+      science: ['textbooks', 'tierlists', 'ratings', 'settings', 'partners', 'developers', 'socials', 'about'],
+      cube: ['builds', 'servers', 'settings', 'partners', 'developers', 'socials', 'about']
     };
 
     let originalNavOrder = null;
@@ -3637,7 +3640,7 @@
       currentTab = tab;
       const searchQuery = searchInput.value.toLowerCase().trim();
 
-      if (['about', 'developers', 'settings', 'socials', 'home', 'archives', 'builds', 'textbooks'].includes(tab)) {
+      if (['about', 'partners', 'developers', 'settings', 'socials', 'home', 'archives', 'builds', 'textbooks', 'tierlists', 'ratings'].includes(tab)) {
         gridContainer.style.display = 'none';
         controlsBar.style.display = 'none';
         staticPageContainer.style.display = 'block';
@@ -4013,6 +4016,24 @@
             </div>
           </div>
         `;
+      } else if (tab === 'partners') {
+        staticPageContainer.innerHTML = `
+          <div class="static-page">
+            <h2>Наши Партнеры</h2>
+            <p>Наши дружественные проекты и платформы:</p>
+            <div class="social-grid" style="margin-top: 20px;">
+              <a href="https://libriumhub.com/projects" target="_blank" rel="noopener noreferrer" class="social-card color-blue">
+                <div class="social-head">
+                  <div class="social-icons">
+                    <img class="social-icon" src="https://static.libriumhub.com/public/base/images/LibriumHub_logo128.png" alt="Librium Hub" loading="lazy">
+                  </div>
+                  <div class="social-title">Librium</div>
+                </div>
+                <div class="social-link-text">https://libriumhub.com/projects</div>
+              </a>
+            </div>
+          </div>
+        `;
       } else if (tab === 'about') {
         let contentHtml = `<p><strong>BigGames</strong> — независимая студия разработки видеоигр, утилит, модификаций и приложений для ПК и мобильных устройств.</p>`;
         staticPageContainer.innerHTML = `<div class="static-page"><h2>О нас</h2>${contentHtml}</div>`;
@@ -4037,6 +4058,20 @@
             <h2>Учебники</h2>
             <p>Учебные материалы BigGames Science:</p>
             <div class="textbook-grid">${booksHtml}</div>
+          </div>
+        `;
+      } else if (tab === 'tierlists') {
+        staticPageContainer.innerHTML = `
+          <div class="static-page">
+            <h2>Тир листы</h2>
+            <p>Раздел тир листов BigGames Science находится в разработке.</p>
+          </div>
+        `;
+      } else if (tab === 'ratings') {
+        staticPageContainer.innerHTML = `
+          <div class="static-page">
+            <h2>Оценки</h2>
+            <p>Раздел оценок и рейтингов BigGames Science находится в разработке.</p>
           </div>
         `;
       } else if (tab === 'archives') {
