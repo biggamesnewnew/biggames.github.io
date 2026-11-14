@@ -6,22 +6,23 @@
   <title>BigGames — Официальный Портал</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #0d0d11;
-      --card-bg: #15151e;
-      --card-border: #262636;
-      --accent-color: #ffffff;
-      --accent-hover: #e0e0e0;
-      --text-main: #f0f0f5;
-      --text-muted: #8e8e9e;
-      --dev-status: #ffcc00;
+      --bg-color: #0b0918;
+      --card-bg: #171334;
+      --card-border: #2d2560;
+      --accent-color: #0078f4;
+      --accent-hover: #3d8bff;
+      --accent-neon: #00e5ff;
+      --text-main: #eef0ff;
+      --text-muted: #9d94c4;
+      --dev-status: #ffd60a;
       --ready-status: #34c759;
-      --header-bg: rgba(13, 13, 17, 0.9);
-      --nav-bg: #111118;
-      --dev-card-bg: #181824;
-      --inner-box-bg: #0d0d11;
+      --header-bg: rgba(11, 9, 24, 0.85);
+      --nav-bg: #120e2b;
+      --dev-card-bg: #1d1850;
+      --inner-box-bg: #100c26;
       --input-bg: var(--card-bg);
       --input-border: var(--card-border);
       --icon-bg: rgba(255, 255, 255, 0.08);
@@ -32,17 +33,18 @@
     }
 
     body.light-theme {
-      --bg-color: #f4f4f8;
+      --bg-color: #f3f2fb;
       --card-bg: #ffffff;
-      --card-border: #e0e0e8;
-      --accent-color: #111118;
-      --accent-hover: #333344;
-      --text-main: #1c1c28;
-      --text-muted: #6e6e82;
+      --card-border: #d9d5f0;
+      --accent-color: #0078f4;
+      --accent-hover: #3d8bff;
+      --accent-neon: #0090c8;
+      --text-main: #1c1a30;
+      --text-muted: #6e6a8e;
       --header-bg: rgba(255, 255, 255, 0.9);
-      --nav-bg: #e8e8f0;
+      --nav-bg: #e9e7f8;
       --dev-card-bg: #ffffff;
-      --inner-box-bg: #f8f8fc;
+      --inner-box-bg: #f6f5fc;
       --input-bg: #ffffff;
       --input-border: #d0d0dc;
       --icon-bg: rgba(0, 0, 0, 0.06);
@@ -601,11 +603,14 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
       background-color: var(--bg-color);
+      background-image:
+        radial-gradient(1100px 520px at 82% -12%, color-mix(in srgb, var(--accent-color) 14%, transparent), transparent 62%),
+        radial-gradient(900px 480px at -12% 112%, color-mix(in srgb, var(--card-border) 35%, transparent), transparent 60%);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
@@ -648,8 +653,9 @@
     }
 
     .logo-box.logo-biggames {
-      background: var(--text-main);
-      color: var(--bg-color);
+      background: linear-gradient(135deg, #0078f4 0%, #3a0ca3 100%);
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(0, 120, 244, 0.45);
     }
 
     .logo-box.logo-errorgames {
@@ -668,6 +674,13 @@
       font-size: 22px;
       letter-spacing: 0.5px;
       color: var(--text-main);
+    }
+
+    body:not(.region-science):not(.region-cube) .logo-text {
+      background: linear-gradient(90deg, var(--accent-neon, #00e5ff), var(--accent-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .header-actions {
@@ -740,7 +753,8 @@
 
     .nav-tab.active {
       color: var(--text-main);
-      border-bottom-color: var(--text-main);
+      border-bottom-color: var(--accent-neon, var(--accent-color));
+      text-shadow: 0 0 14px color-mix(in srgb, var(--accent-neon, var(--accent-color)) 55%, transparent);
     }
 
     .controls-bar {
@@ -805,8 +819,8 @@
     }
 
     .filter-chip.active {
-      background: #007aff;
-      border-color: #007aff;
+      background: var(--accent-color);
+      border-color: var(--accent-color);
       color: #ffffff;
     }
 
@@ -840,7 +854,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -848,7 +862,8 @@
 
     .card:hover {
       transform: translateY(-4px);
-      border-color: #3d3d5c;
+      border-color: var(--accent-color);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px color-mix(in srgb, var(--accent-color) 40%, transparent), 0 0 24px color-mix(in srgb, var(--accent-color) 22%, transparent);
     }
 
     .card-header {
@@ -881,6 +896,18 @@
       color: var(--text-muted);
       flex-shrink: 0;
     }
+
+    @keyframes bgFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    body:not(.region-science):not(.region-cube) .card-logo-frame {
+      animation: bgFloat 5s ease-in-out infinite;
+    }
+
+    body:not(.region-science):not(.region-cube) .card:nth-child(3n) .card-logo-frame { animation-delay: -1.7s; }
+    body:not(.region-science):not(.region-cube) .card:nth-child(3n+1) .card-logo-frame { animation-delay: -3.4s; }
 
     .card-title {
       font-size: 16px;
@@ -2657,38 +2684,24 @@
 
     const database = {
       games: [
-        { name: 'PortalTimeTest', id: 'portaltimetestdemo' },
-        { name: 'Portal ReTimeTest', id: 'portalretimetest' },
-        { name: 'PvZ TypoPushkaMod', id: 'pvztypopushkamod' },
-        { name: 'PvZ PlusPlus', id: 'pvzplusplus' },
-        { name: 'PvZ PlusPlusPro', id: 'pvzpluspluspro' },
-        { name: 'PvZ 2 PlusPlus', id: 'pvz2plusplus' },
-        { name: 'Portal 3 FE', id: 'portal3fe' },
-        { name: 'Portal BigEdition', id: 'portalbigedition' },
-        { name: 'Crashverse Battles', id: 'crashversebattles' },
-        { name: 'CrashverseBattles Mobile', id: 'crashversebattlesmobile' },
-        { name: 'PvZ NewModdingMod', id: 'pvznewmoddingmod' },
-        { name: 'PvZ NewModdingMod Mobile', id: 'pvznewmoddingmodmobile' },
-        { name: 'PvZ NewModdingMod Remastered', id: 'pvznewmoddingmodremastered' },
-        { name: 'UNDERLOVE', id: 'underlove' },
+        { name: 'CRASHVERSE GAME 2.0', id: 'crashversegame20' },
+        { name: 'Portal 3', id: 'portal3fe' },
         { name: 'CountryBallsTale 1', id: 'countryballstale1' },
-        { name: 'CountryBallsTale 2: Magic', id: 'countryballstale2magic' },
-        { name: 'CountryBallsTale 3: Dungeons', id: 'countryballstale3dungeons' },
+        { name: 'UNDERLOVE', id: 'underlove' },
         { name: 'CountryBallsTale 4: Animals', id: 'countryballstale4animals' },
-        { name: 'CountryBallsTale 1: Remastered', id: 'countryballstale1remastered' },
-        { name: 'CountryBallsTale 4 Google', id: 'countryballstale4google' },
-        { name: 'CountryLocation', id: 'countrylocation' },
-        { name: 'PvZ NewReplanted', id: 'pvznewreplanted' },
         { name: 'NewLifeSimulator', id: 'newlifesimulator' },
         { name: 'NewLifeSimulator 2', id: 'newlifesimulator2' },
-        { name: 'ArmyLife', id: 'armylife' },
+        { name: 'PvZ NewModdingMod', id: 'pvznewmoddingmod' },
+        { name: 'PvZ PlusPlus', id: 'pvzplusplus' }
       ],
       apps: [
         { name: 'BaseAIStudio 2.0', id: 'baseaistudio2' },
         { name: 'BG ToolsPack', id: 'bgtoolspack2' },
         { name: 'BG UniversalLauncher', id: 'bguniversallauncher2' },
         { name: 'BG MinecraftLauncher', id: 'bgminecraftlauncher' },
-        { name: 'BG CountryBallsTale Launcher', id: 'bgcountryballstalelauncher2' }
+        { name: 'BG CountryBallsTale Launcher', id: 'bgcountryballstalelauncher2' },
+        { name: 'BG FreeAntivirus', id: 'bgfreeantivirus' },
+        { name: 'BG FreeAntivirus Lite', id: 'bgfreeantiviruslite' }
       ],
       programs: [
         { name: 'BG UniversalOS', id: 'bguniversalos' }
@@ -2905,6 +2918,8 @@
       'bguniversallauncher2': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
       'bgminecraftlauncher': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
       'bgcountryballstalelauncher2': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'bgfreeantivirus': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'bgfreeantiviruslite': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
       'biggamescraft': { engine: '-', lang: '-', format: '-', platforms: ['Windows'] }
     };
 
