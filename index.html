@@ -2284,6 +2284,17 @@
     </div>
   </div>
 
+  <div class="modal-overlay" id="serverModalOverlay">
+    <div class="modal-card" style="max-width: 380px; text-align: center;">
+      <button class="modal-close" id="serverModalClose">&times;</button>
+      <div class="modal-title">GamesWorld</div>
+      <div class="modal-subtitle">BigGames Cube · Сервер</div>
+      <div class="download-buttons" style="justify-content: center; margin-top: 20px;">
+        <a class="btn-download-link" href="https://discord.gg/ugDRw7SgR" target="_blank" rel="noopener noreferrer">💬 Дискорд сервер</a>
+      </div>
+    </div>
+  </div>
+
   <script>
     const giftsDictionary = {
       'Bear': { title: 'Bear', url: 'https://i.ibb.co/ZrqdkSP/Bear-USER.png' },
@@ -2475,6 +2486,15 @@
           { text: 'BOOSTER', class: 'prefix-pink' }
         ],
         interests: ['Deltarune', 'Undertale', 'Minecraft']
+      },
+      {
+        id: 'reclaimmc',
+        name: 'ReclaimMC',
+        avatar: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%233a0ca3"/><text x="50" y="70" font-size="56" text-anchor="middle" fill="%2300e5ff" font-family="Arial" font-weight="bold">R</text></svg>',
+        tags: [
+          { text: 'OWNER', class: 'prefix-red' }
+        ],
+        interests: ['Minecraft']
       }
     ];
 
@@ -2702,13 +2722,14 @@
         { name: 'BG CountryBallsTale Launcher', id: 'bgcountryballstalelauncher2' },
         { name: 'BG FreeAntivirus', id: 'bgfreeantivirus' },
         { name: 'BG FreeAntivirus Lite', id: 'bgfreeantiviruslite' },
-        { name: 'CrystalPrismLauncher', id: 'crystalprismlauncher' }
+        { name: 'CrystalPrismLauncher', id: 'crystalprismlauncher' },
+        { name: 'BG Browser', id: 'bgbrowser' }
       ],
       programs: [
         { name: 'BG UniversalOS', id: 'bguniversalos' }
       ],
       servers: [
-        { name: 'BigGamesCraft', id: 'biggamescraft' }
+        { name: 'GamesWorld', id: 'gamesworld' }
       ]
     };
 
@@ -2922,6 +2943,8 @@
       'bgfreeantivirus': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
       'bgfreeantiviruslite': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
       'crystalprismlauncher': { engine: 'Java', lang: 'Java', format: 'jar (zip)', platforms: ['Windows'] },
+      'bgbrowser': { engine: '-', lang: 'Python', format: 'exe', platforms: ['Windows'] },
+      'gamesworld': { engine: '-', lang: '-', format: '-', platforms: ['Windows'] },
       'biggamescraft': { engine: '-', lang: '-', format: '-', platforms: ['Windows'] }
     };
 
@@ -3059,6 +3082,8 @@
     const youtubeIframeContainer = document.getElementById('youtubeIframeContainer');
     const closeFloatingPlayerBtn = document.getElementById('closeFloatingPlayerBtn');
     const playerTitleText = document.getElementById('playerTitleText');
+    const serverModalOverlay = document.getElementById('serverModalOverlay');
+    const serverModalClose = document.getElementById('serverModalClose');
 
     const SOCIAL_ICON_LABELS = {
       vk: 'VK',
@@ -3141,6 +3166,11 @@
       modalClose.addEventListener('click', closeModal);
       devModalClose.addEventListener('click', closeDevModal);
       musicModalClose.addEventListener('click', () => musicModalOverlay.classList.remove('active'));
+
+      serverModalClose.addEventListener('click', () => serverModalOverlay.classList.remove('active'));
+      serverModalOverlay.addEventListener('click', (e) => {
+        if (e.target === serverModalOverlay) serverModalOverlay.classList.remove('active');
+      });
 
       modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) closeModal();
@@ -3725,7 +3755,13 @@
 
         const card = document.createElement('div');
         card.className = `card`;
-        card.onclick = () => openModal(item);
+        card.onclick = () => {
+          if (item.id === 'gamesworld') {
+            serverModalOverlay.classList.add('active');
+          } else {
+            openModal(item);
+          }
+        };
 
         card.innerHTML = `
           <div>
